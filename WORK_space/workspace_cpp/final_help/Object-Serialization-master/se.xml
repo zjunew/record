@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Serializer>
+    <Demo>
+        <int value="1"/>
+        <float value="3.1415927"/>
+        <string value="Pass test!"/>
+        <std_vector>
+            <string value="item[1]"/>
+            <string value="item[2]"/>
+            <string value="item[3]"/>
+        </std_vector>
+        <User>
+            <int value="3200"/>
+            <int value="99"/>
+            <std_vector>
+                <string value="good"/>
+                <string value="second"/>
+            </std_vector>
+            <std_map/>
+            <string value="hello world"/>
+            <std_vector>
+                <int value="1"/>
+                <int value="2"/>
+                <int value="3"/>
+            </std_vector>
+            <std_list>
+                <int value="4"/>
+                <int value="5"/>
+                <int value="6"/>
+            </std_list>
+            <std_set>
+                <int value="7"/>
+                <int value="8"/>
+                <int value="9"/>
+            </std_set>
+            <std_map>
+                <std_pair>
+                    <int value="1"/>
+                    <string value="how"/>
+                </std_pair>
+                <std_pair>
+                    <int value="2"/>
+                    <string value="are"/>
+                </std_pair>
+                <std_pair>
+                    <int value="3"/>
+                    <string value="you"/>
+                </std_pair>
+            </std_map>
+            <std_pair>
+                <string value="happy birthday"/>
+                <string value="to you!"/>
+            </std_pair>
+            <std_vector>
+                <std_list>
+                    <int value="4"/>
+                    <int value="5"/>
+                    <int value="6"/>
+                </std_list>
+                <std_list>
+                    <int value="2"/>
+                    <int value="6"/>
+                    <int value="8"/>
+                    <int value="45"/>
+                    <int value="6"/>
+                </std_list>
+                <std_list>
+                    <int value="898"/>
+                    <int value="7787"/>
+                    <int value="5454"/>
+                </std_list>
+            </std_vector>
+            <std_map>
+                <std_pair>
+                    <std_vector>
+                        <int value="1"/>
+                        <int value="2"/>
+                        <int value="3"/>
+                    </std_vector>
+                    <string value="first is here"/>
+                </std_pair>
+                <std_pair>
+                    <std_vector>
+                        <int value="7"/>
+                        <int value="45"/>
+                        <int value="88"/>
+                        <int value="954"/>
+                    </std_vector>
+                    <string value="this is the second"/>
+                </std_pair>
+            </std_map>
+            <std_list>
+                <std_vector>
+                    <int value="2"/>
+                    <int value="6"/>
+                    <int value="8"/>
+                    <int value="45"/>
+                    <int value="6"/>
+                </std_vector>
+                <std_vector>
+                    <int value="898"/>
+                    <int value="7787"/>
+                    <int value="5454"/>
+                </std_vector>
+            </std_list>
+        </User>
+    </Demo>
+</Serializer>

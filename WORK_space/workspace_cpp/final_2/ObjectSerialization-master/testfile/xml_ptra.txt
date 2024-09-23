@@ -1,0 +1,9 @@
+<serialization>
+    <int__ptra size="5">
+        <ptra_0 val="1"/>
+        <ptra_1 val="4"/>
+        <ptra_2 val="9"/>
+        <ptra_3 val="16"/>
+        <ptra_4 val="25"/>
+    </int__ptra>
+</serialization>

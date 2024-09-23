@@ -1,0 +1,7 @@
+//当我们公主的位置在1 1 时，我们输入如下：
+go east
+go down
+//找到公主，离开
+go up
+go west
+//由于我们地图较大，有时并不容易找到princess或者monster

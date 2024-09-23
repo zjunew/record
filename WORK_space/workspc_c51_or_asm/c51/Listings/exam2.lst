@@ -1,0 +1,137 @@
+A51 MACRO ASSEMBLER  EXAM2                                                                05/10/2024 22:00:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\exam2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\exam2.asm SET(SMALL) DEBUG PRINT(.\Listings\exam2.lst) OBJECT(.\Obje
+                      cts\exam2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+0000 02003E            2             LJMP START
+0030                   3             ORG 0030H
+0030                   4     TABLE:
+0030 3F065B4F          5             DB  63, 6, 91, 79, 102 ,109 ,125, 7, 127,111,119,115,64,0
+0034 666D7D07                
+0038 7F6F7773                
+003C 4000                    
+                       6     
+003E                   7     START:
+003E 787D              8             MOV R0 , #125
+                       9             ;R0 , R2
+0040                  10     MAIN:
+0040 8880             11             MOV P0 , R0
+0042 1148             12             ACALL KEYDOWN
+0044 11A1             13             ACALL DELAY
+0046 80F8             14         SJMP MAIN    
+                      15     
+0048                  16     KEYDOWN:
+0048 75900F           17         MOV P1 , #0X0F
+004B 11A1             18         ACALL DELAY
+                      19     
+004D 30900A           20         JNB P1.0, COLUMN_0  
+0050 30910B           21             JNB     P1.1, COLUMN_1  
+0053 30920C           22             JNB     P1.2, COLUMN_2  
+0056 30930D           23             JNB     P1.3, COLUMN_3  
+0059 22               24             RET     
+                      25     
+005A                  26     COLUMN_0:
+005A 7800             27             MOV     R0, #0
+005C 800C             28             JMP     ROW_SCAN
+005E                  29     COLUMN_1:
+005E 7801             30             MOV     R0, #1
+0060 8008             31             JMP     ROW_SCAN
+0062                  32     COLUMN_2:
+0062 7802             33             MOV     R0, #2
+0064 8004             34             JMP     ROW_SCAN
+0066                  35     COLUMN_3:
+0066 7803             36             MOV     R0, #3
+0068 8000             37             JMP     ROW_SCAN
+                      38     
+006A                  39     ROW_SCAN:
+006A 7590F0           40             MOV     P1, #0xF0
+006D 11A1             41             ACALL DELAY
+006F 30940A           42             JNB     P1.4, ROW_0             
+0072 30950B           43             JNB     P1.5, ROW_1             
+0075 30960E           44             JNB     P1.6, ROW_2             
+0078 309711           45             JNB     P1.7, ROW_3             
+007B 22               46             RET                             
+                      47     
+007C                  48     ROW_0:
+007C 28               49             ADD     A, R0
+007D F8               50             MOV     R0, A
+007E 8010             51             JMP     KEY_RELEASE
+0080                  52     ROW_1:
+0080 2404             53             ADD     A, #4
+0082 28               54             ADD     A, R0
+A51 MACRO ASSEMBLER  EXAM2                                                                05/10/2024 22:00:40 PAGE     2
+
+0083 F8               55             MOV     R0, A
+0084 800A             56             JMP     KEY_RELEASE
+0086                  57     ROW_2:
+0086 2408             58             ADD     A, #8
+0088 28               59             ADD     A, R0
+0089 F8               60             MOV     R0, A
+008A 8004             61             JMP     KEY_RELEASE
+008C                  62     ROW_3:
+008C 240C             63             ADD     A, #12
+008E 28               64             ADD     A, R0
+008F F8               65             MOV     R0, A
+                      66     
+0090                  67     KEY_RELEASE:
+0090 1199             68             ACALL GET_SQUARE
+0092 7A32             69             MOV     R2, #50         
+0094                  70     RELEASE_LOOP:
+0094 11A1             71             ACALL   DELAY
+0096 DAFC             72             DJNZ    R2, RELEASE_LOOP
+0098 22               73             RET
+                      74     
+0099                  75     GET_SQUARE:          
+0099 900030           76         MOV DPTR, #TABLE 
+009C E8               77             MOV A , R0
+                      78             
+009D 93               79         MOVC A, @A+DPTR     
+009E F8               80             MOV R0 , A     
+009F E4               81             CLR A
+00A0 22               82         RET
+                      83     
+00A1 7BFF             84     DELAY: MOV R3, #0XFF 
+00A3 DBFE             85     D1: DJNZ R3, D1
+00A5 22               86         RET
+                      87     
+                      88     END
+A51 MACRO ASSEMBLER  EXAM2                                                                05/10/2024 22:00:40 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COLUMN_0 . . . . .  C ADDR   005AH   A   
+COLUMN_1 . . . . .  C ADDR   005EH   A   
+COLUMN_2 . . . . .  C ADDR   0062H   A   
+COLUMN_3 . . . . .  C ADDR   0066H   A   
+D1 . . . . . . . .  C ADDR   00A3H   A   
+DELAY. . . . . . .  C ADDR   00A1H   A   
+GET_SQUARE . . . .  C ADDR   0099H   A   
+KEYDOWN. . . . . .  C ADDR   0048H   A   
+KEY_RELEASE. . . .  C ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RELEASE_LOOP . . .  C ADDR   0094H   A   
+ROW_0. . . . . . .  C ADDR   007CH   A   
+ROW_1. . . . . . .  C ADDR   0080H   A   
+ROW_2. . . . . . .  C ADDR   0086H   A   
+ROW_3. . . . . . .  C ADDR   008CH   A   
+ROW_SCAN . . . . .  C ADDR   006AH   A   
+START. . . . . . .  C ADDR   003EH   A   
+TABLE. . . . . . .  C ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

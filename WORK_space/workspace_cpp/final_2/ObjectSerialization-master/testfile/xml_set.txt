@@ -1,0 +1,11 @@
+<serialization>
+    <set＜int＞ size="7">
+        <set_0 val="6"/>
+        <set_1 val="7"/>
+        <set_2 val="9"/>
+        <set_3 val="31"/>
+        <set_4 val="33"/>
+        <set_5 val="54"/>
+        <set_6 val="81"/>
+    </set＜int＞>
+</serialization>

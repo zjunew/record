@@ -1,0 +1,7 @@
+2035-01-01
+C++ code quality (clean, compact, and reasonable)
+Comments quality
+Common classes and functions should be shared between programs
+These programs are physically independent, so direct interaction is not permitted
+These programs are able to work together by means of redirection
+These programs are able to be used in a shell/batch script.

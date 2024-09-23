@@ -1,0 +1,6 @@
+-c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork -I .\CMSIS -I .\Users\Inc -I .\Users\src -I .\User\Inc -I .\StdPeriphDriver\inc -I .\User\Src -I .\User\Inc
+-I.\RTE\_Target_1
+-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+-IC:\Keil_v5\ARM\CMSIS\Include
+-D__UVISION_VERSION="525" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER
+-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d "User\Src\main.c"

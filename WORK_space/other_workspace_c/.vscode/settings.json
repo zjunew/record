@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "rand.h": "c",
+        "my_cal": "c",
+        "stdio.h": "c"
+    }
+}

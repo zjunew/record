@@ -1,0 +1,108 @@
+注：可以用vscode查看
+overflow:hidden的作用:溢出隐藏、清除浮动、解决外边距塌陷
+//来自csdn https://blog.csdn.net/qq_41638795/article/details/83304388
+one 溢出隐藏
+examples:
+(one):
+<style type="text/css">
+    div{ width: 150px; height: 60px; background: skyblue;
+	 overflow: hidden;  /*溢出隐藏*/
+       }
+</style>
+ 
+/*html*/
+<div style="">
+    今天天气很好！<br>今天天气很好！<br>
+    今天天气很好！<br>今天天气很好！<br>
+</div>
+
+(two):
+/*只适用于单行文本*/
+div{ 
+    width: 150px;
+    background: skyblue;
+    overflow: hidden;      /*溢出隐藏*/
+    white-space: nowrap;	/*规定文本不进行换行*/
+    text-overflow: ellipsis;	/*当对象内文本溢出时显示省略标记（...）*/
+}
+
+two:清除浮动
+一般而言，父级元素不设置高度时，高度由随内容增加自适应高度。
+当父级元素内部的子元素全部都设置浮动float之后，子元素会脱离标准流，不占位，
+父级元素检测不到子元素的高度，父级元素高度为0。
+/*css样式*/
+<style type="text/css">
+    .box{ background:skyblue; }
+    .kid{ width: 100px;height: 100px; float:left;}
+    .kid1{ background: yellow; }
+    .kid2{ background: orange; }
+    .wrap{ width: 300px; height: 150px; background: blue; color: white; }
+</style>
+ 
+/*html*/
+<body>
+    <div class="box">
+        <div class="kid kid1">子元素1</div>
+	<div class="kid kid2">子元素2</div>
+    </div>
+    <div class="wrap">其他部分</div>
+</body>
+
+图像：
+在 HTML 中，图像由<img> 标签定义。
+<img> 是空标签，意思是说，它只包含属性，并且没有闭合标签。
+要在页面上显示图像，你需要使用源属性（src）。src 指 "source"。源属性的值是图像的 URL 地址。
+e.g
+<img src="boat.gif" alt="Big Boat">
+alt作为在浏览器无法载入图像时，替换文本属性告诉读者失去的信息。
+
+for example:
+<p>创建图片链接:
+<a href="http://www.runoob.com/html/html-tutorial.html">
+<img  border="10" src="smiley.gif" alt="HTML 教程" width="32" height="32"></a></p>
+border作为边框使用
+
+表格：
+<p>
+每个表格从一个 table 标签开始。 
+每个表格行从 tr 标签开始。
+每个表格的数据从 td 标签开始。
+</p>
+
+<h4>一列:</h4>
+<table border="1">
+<tr>
+  <td>100</td>
+</tr>
+</table>
+
+<h4>一行三列:</h4>
+<table border="1">
+<tr>
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</table>
+
+<h4>两行三列:</h4>
+<table border="1">
+<tr>
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+  <td>400</td>
+  <td>500</td>
+  <td>600</td>
+</tr>
+</table>
+
+CSS (Cascading Style Sheets) 用于渲染HTML元素标签的样式。
+for example:
+<h1 style="font-family:verdana;">一个标题</h1>
+<p style="font-family:arial;color:red;font-size:20px;">一个段落。</p>
+
+font-family（字体），color（颜色），和font-size（字体大小）
+

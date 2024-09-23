@@ -1,0 +1,8 @@
+<serialization>
+    <list＜int＞ size="4">
+        <list_0 val="2"/>
+        <list_1 val="4"/>
+        <list_2 val="6"/>
+        <list_3 val="8"/>
+    </list＜int＞>
+</serialization>

@@ -1,0 +1,465 @@
+	ORG 0000H
+	LJMP START
+    ORG 001BH
+    AJMP BRT1
+	ORG 0060H
+TABLE:
+    DB 63, 6, 91, 79, 102 ,109 ,125, 7, 127,111,119,115,64,0
+
+BRT1:
+	MOV TH0, #0XFC ; 重新加载重装载值
+    MOV TL0, #0X18
+	
+	MOV R1 ,48H
+    INC R1 ; 增加软件计数器
+	MOV 48H , R1
+    CJNE R1, #16, EXIT_ISR ; 如果计数器没有达到100，退出中断服务程序
+
+    MOV 48H, #0 ; 重置软件计数器
+
+	MOV TH1, #0X18  ; 高字节
+	MOV TL1, #0X6A  ; 低字节
+    MOV A, 44H
+    INC A
+    
+    CJNE A, #59 , NEXTS
+    MOV 44H , #0
+    MOV A , 43H
+    INC A
+
+    CJNE A , #59 ,NEXTH
+    MOV 43H , #0
+    MOV A, 42H
+    INC A
+    CJNE A , #24 ,NEXTD
+    MOV 42H , #0
+
+    NEXTD:
+    MOV 42H ,A
+
+    NEXTH:
+    MOV 43H , A
+
+    NEXTS:
+    MOV 44H , A
+	
+    MOV A , 42H
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+
+    MOV A , 43H
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+
+    MOV A , 44H
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+	
+	MOV 50H , #20
+	EXIT_ISR:
+    RETI
+
+GET_VALUE:          
+    MOV DPTR, #ALGO
+	MOV A , R0
+	ADD A, R0
+    JMP @A+DPTR     
+    RET
+
+ALGO:
+    	AJMP SUB0
+        AJMP SUB1
+		AJMP SUB2
+		AJMP SUB3
+		AJMP SUB4
+		AJMP SUB5
+		AJMP SUB6
+		AJMP SUB7
+		AJMP SUB8
+		AJMP SUB9
+		AJMP SUB10
+		AJMP SUB11
+		AJMP SUB12
+		AJMP SUB13
+        AJMP SUB14
+		AJMP SUB15
+		
+    
+SUB0:
+    MOV A, 40H
+    JZ CERATEA
+    MOV 30H , #119
+    MOV 31H , #64
+    MOV 40H , #0
+    RET
+
+CERATEA:
+    MOV 30H , #115
+    MOV 31H , #64
+    MOV 40H , #1
+    RET
+
+SUB1:
+    MOV 30H , #0
+    MOV 31H , #0
+    RET
+
+SUB2:
+	RET
+SUB3:
+	RET
+SUB4:
+    MOV R1,  42H
+    MOV A , R1
+    ADD A, #1
+    MOV 42H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+    RET
+SUB5:
+    MOV R1,  42H
+    MOV A , R1
+	JZ SUB5PLUS
+    DEC A
+    MOV 42H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+    RET
+SUB5PLUS:
+	MOV A ,#23
+	MOV 42H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+    RET
+SUB6:
+	RET
+SUB7:
+	RET
+
+SUB8:
+    MOV R1,  43H
+    MOV A , R1
+    ADD A, #1
+    MOV 43H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+    RET
+SUB9:
+    MOV R1,  43H
+    MOV A , R1
+	JZ SUB8PLUS
+    DEC A
+    MOV 43H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+    RET
+SUB8PLUS:
+	MOV A, #59
+	MOV 43H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+    RET
+SUB10:
+	RET
+SUB11:
+	RET
+
+SUB12:
+    MOV R1,  44H
+    MOV A , R1
+    ADD A, #1
+    MOV 44H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+    RET
+SUB13:
+    MOV R1,  44H
+    MOV A , R1
+	JZ SUB13PLUS
+    DEC A
+    MOV 44H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+    RET
+SUB13PLUS:
+	MOV A , #59
+	MOV 44H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+    RET
+SUB14:
+	RET
+SUB15:
+	RET
+START:
+    ;将值存入地址
+    ;R7,R6,R0
+	MOV R0 , #0x77
+	MOV 30H , R0
+	MOV R1 , #0x40
+    MOV 31H , R1
+    MOV R2 , #0x06
+    MOV 32H , R2
+    MOV R3 , #0x5b
+    MOV 33H , R3
+    MOV R4 , #0X3F
+    MOV 34H , R4
+    MOV R5 , #0X3F
+    MOV 35H , R5
+    MOV R6 , #0X3F
+    MOV 36H , R6
+    MOV R7 , #0X3F
+    MOV 37H , R7
+    MOV 40H , #1
+    MOV 41H , #1
+    MOV 42H,  #12
+    MOV 43H,  #0
+    MOV 44H , #0
+    MOV 48H , #0
+    MOV TMOD , #10H
+    MOV TH1 , #0XFC
+    MOV TL1 , #0X18
+    SETB EA
+    SETB ET1
+    SETB TR1
+MAIN:
+	
+    
+	ACALL	DELAY
+    ACALL SHOW
+	ACALL	DELAY
+    ACALL KEYDOWN
+	ACALL DELAY
+	ACALL	DELAY
+    SJMP MAIN
+
+SHOW:
+    ACALL CHANGE
+	
+	CLR P2.2 
+    CLR P2.3 
+    CLR P2.4 
+    MOV P0, R0
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+	SETB P2.2 
+    CLR P2.3 
+    CLR P2.4 
+    MOV P0, R1
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+    CLR P2.2 
+    SETB P2.3 
+    CLR P2.4 
+    MOV P0, R2
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+    SETB P2.2 
+    SETB P2.3 
+    CLR P2.4 
+    MOV P0, R3
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+    CLR P2.2 
+    CLR P2.3 
+    SETB P2.4 
+    MOV P0, R4
+    ACALL DELAY
+    ACALL CLEAR
+
+	ACALL CHANGE
+    SETB P2.2 
+    CLR P2.3 
+    SETB P2.4 
+    MOV P0, R5
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+    CLR P2.2 
+    SETB P2.3 
+    SETB P2.4 
+    MOV P0, R6
+    ACALL DELAY
+    ACALL CLEAR
+	
+	ACALL CHANGE
+    SETB P2.2 
+    SETB P2.3 
+    SETB P2.4 
+    MOV P0, R7
+    ACALL DELAY
+    ACALL CLEAR
+
+KEYDOWN:
+    MOV P1 , #0X0F
+    ACALL DELAY
+    JNB	P1.0, COLUMN_0	
+	JNB	P1.1, COLUMN_1	
+	JNB	P1.2, COLUMN_2	
+	JNB	P1.3, COLUMN_3	
+	RET	
+COLUMN_0:
+	MOV	R0, #0
+	JMP	ROW_SCAN
+COLUMN_1:
+	MOV	R0, #1
+	JMP	ROW_SCAN
+COLUMN_2:
+	MOV	R0, #2
+	JMP	ROW_SCAN
+COLUMN_3:
+	MOV	R0, #3
+	JMP	ROW_SCAN
+ROW_SCAN:
+	MOV	P1, #0xF0
+	ACALL DELAY
+	JNB	P1.4, ROW_0		
+	JNB	P1.5, ROW_1		
+	JNB	P1.6, ROW_2		
+	JNB	P1.7, ROW_3		
+	RET				
+ROW_0:
+	ADD	A, R0
+	MOV	R0, A
+	JMP	KEY_RELEASE
+ROW_1:
+	ADD	A, #4
+	ADD	A, R0
+	MOV	R0, A
+	JMP	KEY_RELEASE
+ROW_2:
+	ADD	A, #8
+	ADD	A, R0
+	MOV	R0, A
+	JMP	KEY_RELEASE
+ROW_3:
+	ADD	A, #12
+	ADD	A, R0
+	MOV	R0, A
+KEY_RELEASE:
+    ACALL GET_VALUE
+	MOV	R6, #50		
+RELEASE_LOOP:
+	ACALL	DELAY
+	ACALL	DELAY
+	DJNZ	R6, RELEASE_LOOP
+	RET
+
+GET_SQUARE:          
+    MOV DPTR, #TABLE
+	MOV A , R2
+    MOVC A, @A+DPTR     
+	MOV R2 , A     
+	CLR A
+    RET
+
+CLEAR:
+    CLR P2.2 
+    CLR P2.3 
+    CLR P2.4 
+	MOV P0 , #0x00
+	ACALL	DELAY
+    RET
+
+CHANGE:
+    MOV R0 , 30H
+    MOV R1 , 31H
+    MOV R2 , 32H 
+    MOV R3 , 33H 
+    MOV R4 , 34H 
+    MOV R5 , 35H 
+    MOV R6 , 36H
+    MOV R7 , 37H
+    RET
+
+DELAY:
+    MOV R7, #0100
+DELAY1:
+    MOV R5, #4
+DELAY2:
+    DJNZ R5, DELAY2
+    DJNZ R7, DELAY1
+    RET
+
+END

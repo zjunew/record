@@ -1,0 +1,12 @@
+<serialization>
+    <map＜string，int＞ size="2">
+        <map_0>
+            <first val="SC"/>
+            <second val="666"/>
+        </map_0>
+        <map_1>
+            <first val="cx"/>
+            <second val="999"/>
+        </map_1>
+    </map＜string，int＞>
+</serialization>

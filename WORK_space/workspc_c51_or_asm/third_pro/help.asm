@@ -1,0 +1,162 @@
+	ORG 0000H
+	LJMP START
+	ORG 0050H
+TABLE:
+    DB 63, 6, 91, 79, 102 ,109 ,125, 7, 127,111,119,115,64,0
+
+START:
+	MOV R0 , #4
+	ACALL GET_VALUE
+	SJMP START
+
+GET_VALUE:          
+    MOV DPTR, #ALGO
+	MOV A , R0
+	ADD A, R0
+    JMP @A+DPTR     
+    RET
+
+ALGO:
+    	AJMP SUB0
+        AJMP SUB1
+		AJMP SUB2
+		AJMP SUB3
+		AJMP SUB4
+		AJMP SUB5
+		AJMP SUB6
+		AJMP SUB7
+		AJMP SUB8
+		AJMP SUB9
+		AJMP SUB10
+		AJMP SUB11
+		AJMP SUB12
+		AJMP SUB13
+    
+SUB0:
+    MOV A, 40H
+    JZ CERATEA
+    MOV 30H , #119
+    MOV 31H , #64
+    MOV 40H , #0
+    RET
+
+CERATEA:
+    MOV 30H , #115
+    MOV 31H , #64
+    MOV 40H , #1
+    RET
+
+SUB1:
+    MOV 30H , #0
+    MOV 31H , #0
+    
+    RET
+SUB2:
+	RET
+SUB3:
+	RET
+SUB4:
+    MOV R1,  42H
+    MOV A , R1
+    ADD A, #1
+    MOV 42H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+    RET
+SUB5:
+    MOV R1,  42H
+    MOV A , R1
+    DEC A
+    MOV 42H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 32H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 33H ,R2
+    RET
+SUB6:
+	RET
+SUB7:
+	RET
+
+SUB8:
+    MOV R1,  43H
+    MOV A , R1
+    ADD A, #1
+    MOV 43H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+    RET
+SUB9:
+    MOV R1,  43H
+    MOV A , R1
+    DEC A
+    MOV 43H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 34H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 35H ,R2
+    RET
+
+SUB10:
+	RET
+SUB11:
+	RET
+
+SUB12:
+    MOV R1,  44H
+    MOV A , R1
+    ADD A, #1
+    MOV 44H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+    RET
+SUB13:
+    MOV R1,  44H
+    MOV A , R1
+    DEC A
+    MOV 44H , A
+    MOV B, #10
+    DIV AB
+    MOV R2 ,A
+    ACALL GET_SQUARE
+    MOV 36H, R2
+    MOV R2 ,B
+    ACALL GET_SQUARE
+    MOV 37H ,R2
+    RET
+
+GET_SQUARE:          
+    MOV DPTR, #TABLE
+	MOV A , R2
+    MOVC A, @A+DPTR     
+	MOV R2 , A     
+	CLR A
+    RET
+
+END

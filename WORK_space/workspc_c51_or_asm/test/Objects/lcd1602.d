@@ -1,0 +1,12 @@
+.\objects\lcd1602.o: User\Src\lcd1602.c
+.\objects\lcd1602.o: .\User\Inc\lcd1602.h
+.\objects\lcd1602.o: .\User\Inc\public.h
+.\objects\lcd1602.o: .\CMSIS\stm32f10x.h
+.\objects\lcd1602.o: .\CMSIS\core_cm3.h
+.\objects\lcd1602.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\lcd1602.o: .\CMSIS\system_stm32f10x.h
+.\objects\lcd1602.o: .\User\Inc\stm32f10x_conf.h
+.\objects\lcd1602.o: .\StdPeriphDriver\inc\stm32f10x_gpio.h
+.\objects\lcd1602.o: .\CMSIS\stm32f10x.h
+.\objects\lcd1602.o: .\StdPeriphDriver\inc\stm32f10x_rcc.h
+.\objects\lcd1602.o: .\StdPeriphDriver\inc\misc.h

@@ -1,0 +1,117 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=IK1BF-6M2RT-63SMB-2EKZY-QV6YC-8P1JZ
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
+Toolchain Path:  D:\work\keilv5s\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.22
+Assembler:       Armasm.exe V6.22
+Linker/Locator:  ArmLink.exe V6.22
+Library Manager: ArmAr.exe V6.22
+Hex Converter:   FromElf.exe V6.22
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.11.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\stm32_source\hw04.uvprojx
+Project File Date:  06/01/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.22', folder: 'D:\work\keilv5s\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+USER/Src/main.c(188): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  188 |                                         stack_top(s2,&oop);//<BD><AB><D7><U+EDA5><B5><C4>һ<B8><F6><B2><D9><D7><F7><B7><FB><BA>ű<B8><B7><DD>
+      |                                                      ^~~~
+./USER\stack.h(21): note: passing argument to parameter 'x' here
+   21 | int stack_top(STACK *ptr,int *x) ; //ȡջ<B6><A5>Ԫ<CB>ز鿴,<B2><BB><B3><F6>ջ
+      |                               ^
+USER/Src/main.c(191): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  191 |                                                 stack_pop(s2,&oop);
+      |                                                              ^~~~
+./USER\stack.h(20): note: passing argument to parameter 'x' here
+   20 | int stack_pop(STACK *ptr, int *x);
+      |                                ^
+USER/Src/main.c(193): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  193 |                                                 stack_top(s2,&oop);//<BD><AB><C0><A8><BA><C5><C4>ڵļ<C6><CB><E3><BA><F3><B4><E6><C8><EB>s1<D6>У<AC>                                         
+      |                                                              ^~~~
+./USER\stack.h(21): note: passing argument to parameter 'x' here
+   21 | int stack_top(STACK *ptr,int *x) ; //ȡջ<B6><A5>Ԫ<CB>ز鿴,<B2><BB><B3><F6>ջ
+      |                               ^
+USER/Src/main.c(195): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  195 |                                         stack_pop(s2,&oop); //<BD><AB><B7><B4><C0><A8><BA><C5>ȥ<B5><F4><A1><A3>
+      |                                                      ^~~~
+./USER\stack.h(20): note: passing argument to parameter 'x' here
+   20 | int stack_pop(STACK *ptr, int *x);
+      |                                ^
+USER/Src/main.c(206): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'const int *' [-Wincompatible-pointer-types]
+  206 |                                                 stack_push(s2,&a_stack[i]);
+      |                                                               ^~~~~~~~~~~
+./USER\stack.h(19): note: passing argument to parameter 'x' here
+   19 | int stack_push(STACK *ptr, const int *x);
+      |                                       ^
+USER/Src/main.c(209): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  209 |                                         stack_top(s2,&oop);
+      |                                                      ^~~~
+./USER\stack.h(21): note: passing argument to parameter 'x' here
+   21 | int stack_top(STACK *ptr,int *x) ; //ȡջ<B6><A5>Ԫ<CB>ز鿴,<B2><BB><B3><F6>ջ
+      |                               ^
+USER/Src/main.c(233): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'const int *' [-Wincompatible-pointer-types]
+  233 |                                                 stack_push(s2,&a_stack[i]);
+      |                                                               ^~~~~~~~~~~
+./USER\stack.h(19): note: passing argument to parameter 'x' here
+   19 | int stack_push(STACK *ptr, const int *x);
+      |                                       ^
+USER/Src/main.c(239): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  239 |                                                 stack_pop(s2,&oop);
+      |                                                              ^~~~
+./USER\stack.h(20): note: passing argument to parameter 'x' here
+   20 | int stack_pop(STACK *ptr, int *x);
+      |                                ^
+USER/Src/main.c(243): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  243 |                                                 stack_top(s2,&oop);
+      |                                                              ^~~~
+./USER\stack.h(21): note: passing argument to parameter 'x' here
+   21 | int stack_top(STACK *ptr,int *x) ; //ȡջ<B6><A5>Ԫ<CB>ز鿴,<B2><BB><B3><F6>ջ
+      |                               ^
+USER/Src/main.c(265): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'const int *' [-Wincompatible-pointer-types]
+  265 |                                         stack_push(s2,&oop);
+      |                                                       ^~~~
+./USER\stack.h(19): note: passing argument to parameter 'x' here
+   19 | int stack_push(STACK *ptr, const int *x);
+      |                                       ^
+USER/Src/main.c(277): warning: incompatible pointer types passing 'u8 *' (aka 'unsigned char *') to parameter of type 'int *' [-Wincompatible-pointer-types]
+  277 |                         stack_pop(s2,&oop);
+      |                                      ^~~~
+./USER\stack.h(20): note: passing argument to parameter 'x' here
+   20 | int stack_pop(STACK *ptr, int *x);
+      |                                ^
+11 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=4588 RO-data=268 RW-data=48 ZI-data=1544  
+FromELF: creating hex file...
+".\Objects\hw04.axf" - 0 Error(s), 11 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil::STM32F1xx_DFP@2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  D:/work/keilv5s/pkg/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

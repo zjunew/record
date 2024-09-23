@@ -1,0 +1,10 @@
+.vscode/
+.git/
+*.exe
+bin/
+build/
+output/
+*.cmake
+*.stackdump
+CMakeFiles/
+*.sln

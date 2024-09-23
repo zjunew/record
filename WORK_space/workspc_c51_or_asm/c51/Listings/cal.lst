@@ -1,0 +1,189 @@
+C51 COMPILER V9.59.0.0   CAL                                                               05/29/2024 11:10:00 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE CAL
+OBJECT MODULE PLACED IN .\Objects\cal.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\forth_pro\cal.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\cal.lst) TABS(2) OBJECT(.\Objects\cal.obj)
+
+line level    source
+
+   1          #include <stdlib.h>
+   2          #include <string.h>
+   3          
+   4          unsigned char nums[20];
+   5          unsigned char ans[10];
+   6          unsigned char re[8];
+   7          unsigned char count = 0;
+   8          
+   9          typedef struct node {
+  10              unsigned char date;
+  11              char opt;
+  12              struct node* pre;
+  13          }* pnode, node;
+  14          
+  15          typedef struct stack {
+  16              pnode bottom;   //指向底部
+  17              pnode top;  //指向头部
+  18          }* pstack, stack;
+  19          
+  20          pstack create_stack(void) {
+  21   1          pstack s = (pstack)malloc(sizeof(stack));
+  22   1          s->bottom = s->top = (pnode)malloc(sizeof(node));
+  23   1          return s;
+  24   1      }
+  25          
+  26          void push(pstack s, char date) {
+  27   1          pnode t = (pnode)malloc(sizeof(node));
+  28   1          t->pre = s->top;
+  29   1          t->date = date;
+  30   1          s->top = t;
+  31   1      }
+  32          
+  33          void pop(pstack s) {
+  34   1          pnode t = s->top;
+  35   1          if (s->top == s->bottom) 
+  36   1          {
+  37   2              return ;
+  38   2          }
+  39   1          s->top = s->top->pre;
+  40   1          free(t);
+  41   1      }
+  42          
+  43          unsigned char empty(pstack s) {
+  44   1          if (s->top == s->bottom) {
+  45   2              return 1;
+  46   2          }
+  47   1          else {
+  48   2              return 0;
+  49   2          }
+  50   1      }
+  51          
+  52          unsigned char top(pstack s) {
+  53   1          return s->top->date;
+  54   1      }
+C51 COMPILER V9.59.0.0   CAL                                                               05/29/2024 11:10:00 PAGE 2   
+
+  55          
+  56          void push_num(pstack s, unsigned char date) {
+  57   1          pnode t = (pnode)malloc(sizeof(node));
+  58   1          t->pre = s->top;
+  59   1          t->date = date;
+  60   1          s->top = t;
+  61   1      }
+  62          
+  63          
+  64          unsigned char cal()
+  65          {
+  66   1          unsigned char mysize = 0;
+  67   1          unsigned char sum = 0, ans = 0;
+  68   1          
+  69   1          char str[20], suffix[20];
+  70   1          unsigned char opt[20];
+  71   1          unsigned char len = count, p = 0, flag = 1 , i , t1;
+  72   1         
+  73   1          pstack number_stack = create_stack();
+  74   1          pstack s_opt = create_stack();
+  75   1          pstack s_num = create_stack();
+  76   1          opt['+'] = opt['-'] = 1;
+  77   1          opt['*'] = opt['/'] = 2;
+  78   1          opt['('] = opt[')'] = 0;
+  79   1          memset(opt, 0, sizeof(opt));
+  80   1          strncpy(str , (char*)nums , count);
+  81   1          for (i = 0; i < len; i++) {
+  82   2              if (str[i] <= '9' && str[i] >= '0') {
+  83   3                  suffix[p++] = str[i];
+  84   3                  if (i+1 < len && str[i+1] <= '9' && str[i+1] >= '0');
+  85   3                  else    suffix[p++] = ' ';
+  86   3                  flag = 0;
+  87   3                  continue;
+  88   3              }
+  89   2              else {
+  90   3                  flag++;
+  91   3              }
+  92   2              if (str[i] == '(') {
+  93   3                  push(s_opt, str[i]);
+  94   3              }
+  95   2              else if (str[i] == ')') {
+  96   3                  while(top(s_opt) != '(') {
+  97   4                      //printf("%c\n", top(s_opt));
+  98   4                      suffix[p++] = top(s_opt);
+  99   4                      pop(s_opt);
+ 100   4                  }
+ 101   3                  pop(s_opt);
+ 102   3                  //printf("1");
+ 103   3              }
+ 104   2              else if (empty(s_opt) && str[i] != ' ') {
+ 105   3                  push(s_opt, str[i]);
+ 106   3              }
+ 107   2              else {
+ 108   3                  while(!empty(s_opt) && opt[str[i]] <= opt[top(s_opt)]) {
+ 109   4                      suffix[p++] = top(s_opt);
+ 110   4                      pop(s_opt);
+ 111   4                  }
+ 112   3                  push(s_opt, str[i]);
+ 113   3              }
+ 114   2          }
+ 115   1          while(!empty(s_opt)) {
+ 116   2              suffix[p++] = top(s_opt);
+C51 COMPILER V9.59.0.0   CAL                                                               05/29/2024 11:10:00 PAGE 3   
+
+ 117   2              pop(s_opt);
+ 118   2          }
+ 119   1              
+ 120   1          flag = 0;
+ 121   1          sum = 0, ans = 0;
+ 122   1          for (i = 0; i < p; i++) {
+ 123   2              if (suffix[i] <= '9' && suffix[i] >= '0') {
+ 124   3                  sum = sum*10 + (suffix[i]-'0');
+ 125   3                  flag = 1;
+ 126   3              }
+ 127   2              else {
+ 128   3                  if (flag == 1) {
+ 129   4                      push(number_stack, sum);
+ 130   4                      sum = 0;
+ 131   4                      flag = 0;
+ 132   4                  }
+ 133   3                  if (suffix[i] == '+' || suffix[i] == '-' || suffix[i] == '*' || suffix[i] == '/') {
+ 134   4                      t1 = number_stack->top->date;
+ 135   4                      pop(number_stack);
+ 136   4                      if (suffix[i] == '+') {
+ 137   5                          number_stack->top->date += t1;
+ 138   5                      }
+ 139   4                      else if (suffix[i] == '-') {
+ 140   5                          number_stack->top->date -= t1;
+ 141   5                      }
+ 142   4                      else if (suffix[i] == '*') {
+ 143   5                          number_stack->top->date *= t1;
+ 144   5                      }
+ 145   4                      else if (suffix[i] == '/') {
+ 146   5                          number_stack->top->date /= t1;
+ 147   5                      }
+ 148   4                  }
+ 149   3              }
+ 150   2          }
+ 151   1          sum = number_stack->top->date;
+ 152   1          mysize = 0;
+ 153   1          while(sum>0)
+ 154   1          {
+ 155   2              i = sum %10;
+ 156   2              re[mysize] = i ;
+ 157   2              mysize ++;
+ 158   2              sum = sum / 10;
+ 159   2          }
+ 160   1          return mysize;
+ 161   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1152    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     39     103
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,114 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.25.3.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: w dm, zju, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\bin\
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DCM.DLL V1.13.1.0
+Target DLL:      UL2CM3.DLL V1.155.0.0
+Dialog DLL:      TCM.DLL V1.14.4.0
+ 
+<h2>Project:</h2>
+C:\vscode\WORK_space\workspc_c51_or_asm\Goodbye\hw04.uvprojx
+Project File Date:  06/12/2024
+
+<h2>Output:</h2>
+*** Using Compiler '', folder: 'C:\Keil_v5\ARM\ARMCC\bin\'
+Rebuild target 'Target 1'
+assembling startup_stm32f10x_md.s...
+compiling stack.c...
+USER\stack.h(15): warning:  #1295-D: Deprecated declaration stack_create - give arg types
+  STACK *stack_create();
+USER\stack.h(25): warning:  #1-D: last line of file ends without a newline
+  #endif
+USER\stack.c: 2 warnings, 0 errors
+compiling system_stm32f10x.c...
+compiling stm32f10x_it.c...
+compiling led.c...
+compiling public.c...
+compiling main.c...
+.\USER\stack.h(15): warning:  #1295-D: Deprecated declaration stack_create - give arg types
+  STACK *stack_create();
+.\USER\stack.h(25): warning:  #1-D: last line of file ends without a newline
+  #endif
+USER\Src\main.c(13): warning:  #1295-D: Deprecated declaration calculate - give arg types
+  void calculate();
+USER\Src\main.c(197): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_top(s2,&oop);//将最顶的一个操作符号备份
+USER\Src\main.c(200): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_pop(s2,&oop);
+USER\Src\main.c(202): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_top(s2,&oop);//将括号内的计算后存入s1中，						
+USER\Src\main.c(204): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_pop(s2,&oop); //将反括号去掉。
+USER\Src\main.c(215): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const int *"
+  						stack_push(s2,&a_stack[i]);
+USER\Src\main.c(218): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_top(s2,&oop);
+USER\Src\main.c(242): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const int *"
+  						stack_push(s2,&a_stack[i]);
+USER\Src\main.c(248): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_pop(s2,&oop);
+USER\Src\main.c(252): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_top(s2,&oop);
+USER\Src\main.c(274): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const int *"
+  					stack_push(s2,&oop);
+USER\Src\main.c(286): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "int *"
+  			stack_pop(s2,&oop);
+USER\Src\main.c: 14 warnings, 0 errors
+compiling misc.c...
+compiling stm32f10x_adc.c...
+compiling stm32f10x_bkp.c...
+compiling stm32f10x_crc.c...
+compiling stm32f10x_cec.c...
+compiling stm32f10x_dac.c...
+compiling stm32f10x_dbgmcu.c...
+compiling stm32f10x_can.c...
+compiling stm32f10x_dma.c...
+compiling stm32f10x_exti.c...
+compiling stm32f10x_flash.c...
+compiling stm32f10x_fsmc.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_iwdg.c...
+compiling stm32f10x_i2c.c...
+compiling stm32f10x_pwr.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_rtc.c...
+compiling stm32f10x_spi.c...
+compiling stm32f10x_usart.c...
+compiling stm32f10x_sdio.c...
+compiling stm32f10x_tim.c...
+compiling stm32f10x_wwdg.c...
+linking...
+Program Size: Code=3300 RO-data=268 RW-data=84 ZI-data=1540  
+FromELF: creating hex file...
+".\Objects\hw04.axf" - 0 Error(s), 16 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

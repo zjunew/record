@@ -1,0 +1,50 @@
+L[0]表示明文左32位, R[0]表示明文右32位
+DES加密需要做16轮循环, 循环轮号以1为基数
+K[0]表示DES的初始64位密钥
+K[i]表示第i轮加密时用到的56位密钥
+des_encrypt()
+{
+	for(i=1; i<=16; i++)
+	{
+		if(i%2==1) // 奇数轮加密L[i]
+		{
+			L[i] = L[i-1] ^ f(K[i], R[i-1]);
+			R[i] = R[i-1];
+		}
+		else // 偶数轮加密R[i]
+		{
+			R[i] = R[i-1] ^ f(K[i], L[i-1]);
+			L[i] = L[i-1];
+		}
+	}
+	t = L[16];
+	L[16] = R[16];
+	R[16] = t;
+}
+
+des_decrypt()
+{
+	for(i=16; i>=1; i--)
+	{
+		if(i%2==0) // 偶数轮解密L[i]
+		{
+			L[i-1] = L[i] ^ f(K[i], R[i]);
+			R[i-1] = R[i];
+		}
+		else // 奇数轮解密R[i]
+		{
+			R[i-1] = R[i] ^ f(K[i], L[i]);
+			L[i-1] = L[i];
+		}
+	}
+	t = L[i];
+	L[i] = R[i];
+	R[i] = t;
+}
+
+long f(K[i], D[i])
+{
+   K48 = Shrink(K[i]);
+	D48 = Expand(D[i]);
+	return query_sbox(K48 ^ D48);   
+}

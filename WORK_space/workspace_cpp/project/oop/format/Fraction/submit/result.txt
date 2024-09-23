@@ -1,0 +1,34 @@
+这个是结果：
+Default ctor | Ctor takes two integers as parameters | Copy ctor
+Wrong input ! Please input again.The denominator can't be 0.
+copy constructor is called
+The answer is: 1 / 2
+copy constructor is called
+The answer is: 3 / 5
+The answer is: 707 / 500
+
+Conversion from a finite decimal string like: 1.414
+The answer is: 707 / 500
+
+All kinds of Arithmetical operators:
+The answer is: 11 / 10
+The answer is: -1 / 10
+The answer is: 3 / 10
+The answer is: 5 / 6
+
+Relational operators: < <= == != >= >
+a <= b : 1
+a < b : 1
+a >= b : 0
+a > b : 0
+a == b : 0
+a != b : 1
+
+Typecast to double | To string
+ k = 0.5
+s = 1 / 2
+
+Inserter and extractor for streams
+Please input a fraction number like 2/3 :
+15/21    (或者 1.414)
+The answer is: 5 / 7    （707/500）

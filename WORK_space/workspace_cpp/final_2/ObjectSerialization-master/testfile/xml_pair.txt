@@ -1,0 +1,6 @@
+<serialization>
+    <pair＜string，int＞>
+        <first val="Good"/>
+        <second val="123"/>
+    </pair＜string，int＞>
+</serialization>

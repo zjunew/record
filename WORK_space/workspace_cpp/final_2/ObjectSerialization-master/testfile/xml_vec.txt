@@ -1,0 +1,8 @@
+<serialization>
+    <vector＜int＞ size="4">
+        <vector_0 val="1"/>
+        <vector_1 val="3"/>
+        <vector_2 val="5"/>
+        <vector_3 val="7"/>
+    </vector＜int＞>
+</serialization>

@@ -1,0 +1,597 @@
+<!DOCTYPE html><html><head>
+      <title>Report</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\26455\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.3\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="centerobject-serializationcenter"><center>Object-Serialization</center></h1>
+
+<p>2022-ZJU-OOP Final-Project cx</p>
+<p>Simply run the shell script <code>./run.sh</code> to compile and run the program, which depends to the <code>Makefile</code> coded by me earlier.</p>
+<h2 class="mume-header" id="1-project-requirements">1 Project requirements</h2>
+
+<hr>
+<h3 class="mume-header" id="description">Description</h3>
+
+<p>In computer science, serialization is the process of translating object state into a format that can be stored/transmitted and reconstructed later.</p>
+<p>Binary serialization uses binary encoding to produce a compact result for uses such as storage or socket-based network streams. This mechanism is especially useful if you have to handle big data where the loading/saving time is crucial.<br>
+For cases where you want to read/edit the serialized data, e.g., for software configuration, a serialization to text files (XML, JSON, etc.) is a natural choice.</p>
+<p>Please refer to <a href="https://en.wikipedia.org/wiki/Serialization">Serialization</a> for more details.</p>
+<h3 class="mume-header" id="requirements">Requirements</h3>
+
+<ul>
+<li>Implement a module to support binary serialization/deserialization:</li>
+</ul>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-int">int</span> n0 <span class="token operator">=</span> <span class="token number">256</span><span class="token punctuation">,</span> n1<span class="token punctuation">;</span>
+<span class="token comment">// serialize object n0 to a binary file n.data</span>
+<span class="token function">serialize</span><span class="token punctuation">(</span>n0<span class="token punctuation">,</span> <span class="token string">&quot;n.data&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// reconstruct object n1 from the content of n.data</span>
+<span class="token function">deserialize</span><span class="token punctuation">(</span>n1<span class="token punctuation">,</span> <span class="token string">&quot;n.data&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// now n0 == n1 should be true.</span>
+</pre><ul>
+<li>Implement a wrapper module of <a href="https://github.com/leethomason/tinyxml2">tinyxml2</a> to support <strong>XML</strong> serialization:</li>
+</ul>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp">std<span class="token double-colon punctuation">::</span>pair<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span> <span class="token keyword keyword-double">double</span><span class="token operator">&gt;</span> pair0 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3.1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> pair1<span class="token punctuation">;</span>
+<span class="token comment">// serialize object pair0 to an XML file pair.xml with the name std_pair</span>
+<span class="token function">serialize_xml</span><span class="token punctuation">(</span>pair0<span class="token punctuation">,</span> <span class="token string">&quot;std_pair&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pair.xml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// reconstruct object pair1 from the content of pair.xml</span>
+<span class="token function">deserialize_xml</span><span class="token punctuation">(</span>pair1<span class="token punctuation">,</span> <span class="token string">&quot;std_pair&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;pair.xml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// now pair0 == pair1 should be true.</span>
+</pre><p>The pair.xml would be something like:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>serialization</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>std_pair</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>first</span> <span class="token attr-name">val</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>2<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>second</span> <span class="token attr-name">val</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>3.1000000000000001<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>std_pair</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>serialization</span><span class="token punctuation">&gt;</span></span>
+</pre><ul>
+<li>
+<p>Every module has its namespace.</p>
+</li>
+<li>
+<p>Both modules should at least support the serialization of arithmetic types (see <code>std::is_arithmetic</code>), C++ string type (<code>std::string</code>), and STL containers (<code>std::pair</code>, <code>std::vector</code>, <code>std::list</code>, <code>std::set</code>, and <code>std::map</code>).</p>
+</li>
+<li>
+<p>Both modules should provide a convenient mechanism (by macro, template, etc.) to support the serialization of user-defined types, e.g.,</p>
+</li>
+<li>
+<p>During testing, you should cover all the required types and options.</p>
+</li>
+<li>
+<p><strong>Bonus</strong> Use binary-to-text encoding/decoding (<a href="https://en.wikipedia.org/wiki/Base64">base64</a>) to implement a binary mode of XML serialization.</p>
+</li>
+<li>
+<p><strong>Bonus</strong> Support the serialization of smart pointers, e.g., <code>std::unique_ptr</code>.</p>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="2-project-description">2 Project description</h2>
+
+<h3 class="mume-header" id="21-how-to-run-the-program">2.1 How to run the program</h3>
+
+<p>Simply run the shell script <code>./run.sh</code> to compile and run the program, which depends to the <code>Makefile</code> coded by me earlier.</p>
+<h3 class="mume-header" id="22-tested-cases">2.2 Tested cases</h3>
+
+<p>It should support any combination and any nested situation of the following types in theory, but due to the complexity of test, only several representative cases are tested.</p>
+<h4 class="mume-header" id="221-basic-data-types">2.2.1 Basic data types</h4>
+
+<p>The project tested many cases where all the mentioned data types are combined:</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp">    <span class="token comment">/**
+     * @brief std::is_arithmetic contains:
+     *          bool:        true   0
+     *          int:         true   1
+     *          int const:   true   2
+     *          float:       true   3
+     *          float const: true   
+     *          char:        true
+     *          char const:  true
+     *          std::string
+     * 
+     *        STL containers :
+     *          std::pair
+     *          std::vector
+     *          std::list
+     *          std::set
+     *          std::map
+     */</span>
+
+    <span class="token keyword keyword-bool">bool</span> test_bool <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-char">char</span> test_char <span class="token operator">=</span> <span class="token string">&apos;a&apos;</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> test_int <span class="token operator">=</span> <span class="token number">32</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-float">float</span> test_float <span class="token operator">=</span> <span class="token number">1.414</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>string test_string <span class="token operator">=</span> <span class="token string">&quot;hello world&quot;</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> test_vector <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> test_list <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>set<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span> test_set <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> test_map <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">&quot;how&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">&quot;are&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">&quot;you&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// nested basic types</span>
+    std<span class="token double-colon punctuation">::</span>pair<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> test_pair <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;happy birthday&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;to you!&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;&gt;</span> test_v_l <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">898</span><span class="token punctuation">,</span><span class="token number">7787</span><span class="token punctuation">,</span><span class="token number">5454</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> test_i_m <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span>test_vector<span class="token punctuation">,</span><span class="token string">&quot;first is here&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>\
+                                                <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">88</span><span class="token punctuation">,</span><span class="token number">954</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;this is the second&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;&gt;</span> test_l_v <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">898</span><span class="token punctuation">,</span><span class="token number">7787</span><span class="token punctuation">,</span><span class="token number">5454</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>set<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;&gt;</span> test_s_l <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token number">898</span><span class="token punctuation">,</span><span class="token number">7787</span><span class="token punctuation">,</span><span class="token number">5454</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</pre><p>Note: <strong>The program is coded in the way where in theory, any combination and any nested situation of data types can be serialized and deserialized in either binary way or XML way.</strong></p>
+<h4 class="mume-header" id="222-user-defined-types">2.2.2 User defined types</h4>
+
+<p>The program implements the support of user-defined types consists only of the basic types mentioned above in a way of static reflection.<br>
+All the user-defined types should be added a macro definition in format as follows:</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">User_Define</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">DEFINE_STRUCT_SCHEMA</span><span class="token punctuation">(</span>User_Define<span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>member1<span class="token punctuation">,</span><span class="token string">&quot;member1&apos;s name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>member2<span class="token punctuation">,</span><span class="token string">&quot;member2&apos;s name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>member3<span class="token punctuation">,</span><span class="token string">&quot;member3&apos;s name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>member4<span class="token punctuation">,</span><span class="token string">&quot;member4&apos;s name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><ul>
+<li>It supported a simple user defined type like:</li>
+</ul>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">User</span><span class="token punctuation">{</span>
+        <span class="token keyword keyword-int">int</span> id<span class="token punctuation">;</span>
+        <span class="token keyword keyword-int">int</span> age<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> gpa<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span><span class="token keyword keyword-float">float</span><span class="token operator">&gt;</span> sub<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">DEFINE_STRUCT_SCHEMA</span><span class="token punctuation">(</span>User<span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>age<span class="token punctuation">,</span><span class="token string">&quot;age&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>gpa<span class="token punctuation">,</span><span class="token string">&quot;gpa&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>sub<span class="token punctuation">,</span><span class="token string">&quot;sub&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              
+</pre><ul>
+<li>Also, a nested user defined type is supported, here is a sample struct :</li>
+</ul>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">Demo</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword keyword-float">float</span> ratio<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>string name<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span> token<span class="token punctuation">;</span>
+    User cases<span class="token punctuation">;</span>           <span class="token comment">// note that here a member type is alse user defined</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">DEFINE_STRUCT_SCHEMA</span><span class="token punctuation">(</span>Demo<span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>ratio<span class="token punctuation">,</span><span class="token string">&quot;ratio&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span><span class="token string">&quot;token&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DEFINE_STRUCT_FIELD</span><span class="token punctuation">(</span>cases<span class="token punctuation">,</span><span class="token string">&quot;cases&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</pre><h3 class="mume-header" id="23-main-framework">2.3 Main Framework</h3>
+
+<p>The project has mainly two parts and both have no dependency of each other.</p>
+<h4 class="mume-header" id="231-binary-serialization-and-deserialization">2.3.1 Binary serialization and deserialization</h4>
+
+<p>For Binary part, the binary serialized data is stored in a char array before it is written to a file. The <code>src/include/Buffer.h</code> file contains the I/O part of the project, so it will not be described in detail here.</p>
+<p>The upper abstraction is in <code>namespace binary</code>. It provides the following functions: <code>binary::serialize</code> and <code>binary::deserialize</code>. In both, the objects are transfered to binary format and then written to a file.</p>
+<p>The serialized data is transferd by Class <code>Seel</code>, which later is also responsible for the deserialization:</p>
+<p>The member variants of <code>Seel</code> are:</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp">    Type return_type<span class="token punctuation">;</span>       <span class="token comment">// the class type it should return when deserialized</span>
+    <span class="token keyword keyword-int32_t">int32_t</span> meta_num<span class="token punctuation">;</span>       <span class="token comment">// the total number of elements</span>
+    size_t atom_size<span class="token punctuation">;</span>       <span class="token comment">// the size of atomic elements</span>
+    <span class="token keyword keyword-char">char</span><span class="token operator">*</span> data_<span class="token punctuation">;</span>            <span class="token comment">// binary of the object</span>
+</pre><p>Here atomic elements means those types that can not be cut to smaller conponents, e.g., <code>int</code> and <code>char</code> are atomic, but <code>std::string</code> and STL containers like <code>std::vector&lt;&gt;</code> are not. <code>data_</code> is what stores the object we want to serialize and is also what we want to deserialize from later on.<br>
+Apart from <code>data_</code>, other three data members are metadata used to indicate the deserialization process.<br>
+For atomic types, <code>data_</code> is simply a binary data recieved by <code>memcpy</code> from the object. For non-atomic types, <code>data_</code> is exactly what each of its conponents is serialized to file. If the conponent of a non-atomic type is also a non-atomic type, then do it recursively.<br>
+To write the data to file, <code>Buffer::writebin(const Seel&amp; )</code> is provided. It first writes the metadata to the file, then writes the binary data to the file.</p>
+<p>When it come to deserialization, the <code>Buffer::readbin(Seel&amp;)</code> is used to read the metadata from the file, then reads the binary data from the file and assign it to <code>Seel::data_</code>. <code>Seel::writeback(T&amp; )</code> then deserializes the binary data to the object. The deserialization process is similar to the serialization process, to deserialize the non-atomic types, a recursive process is essential: <code>Seel::deserialized_frombytes(char* )</code> is used to deseialize the sub-objects from father&apos;s <code>data_</code>.</p>
+<h4 class="mume-header" id="232-xml-serialization-and-deserialization">2.3.2 XML serialization and deserialization</h4>
+
+<p>Based on the Binary way methods, XML serialization is quite similar. <code>namespace xml</code> and <code>namespace SeelXML</code> deals with the upper abstraction and the core implementations. All the values are stored in the Nodes isolatedly.<br>
+A sample output of the program, <code>Demo</code> and <code>User</code> are user-defined types:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Serializer</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Demo</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>int</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>float</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>3.1415927<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Pass test!<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>std_vector</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item[1]<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item[2]<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item[3]<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>std_vector</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>User</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>int</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>3200<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>int</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>99<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>std_vector</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>good<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>second<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>std_vector</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>std_map</span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>User</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Demo</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Serializer</span><span class="token punctuation">&gt;</span></span>
+</pre><p>To serialize a object, program first check if it&apos;s atom type. If so, open a child-node and store it, otherwise, open a child-node and shifts to it and serialize all its conponents recursively.</p>
+<h2 class="mume-header" id="3-core-techniques">3 Core Techniques</h2>
+
+<hr>
+<h3 class="mume-header" id="reflection">Reflection</h3>
+
+<p>To implement the support of any user-defined type, a simple reflection mechanism is needed. This program has a simple static reflection mechanism that not affecting the run-time performance.</p>
+<h4 class="mume-header" id="eleminated-implementation">Eleminated implementation</h4>
+
+<p>To implement a static reflection function, I first tried a totally based on macro way, namely insert functions into user-defined types like:</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">Demo</span><span class="token punctuation">{</span>
+    <span class="token function">REFLECTION</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">)</span><span class="token punctuation">,</span>id<span class="token punctuation">,</span>
+        <span class="token punctuation">(</span><span class="token keyword keyword-float">float</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ratio<span class="token punctuation">,</span>
+        <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mapping
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// is processed into</span>
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">Demo</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> id<span class="token punctuation">;</span>
+    <span class="token keyword keyword-float">float</span>  ratio<span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span>  mapping<span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-int">int</span><span class="token operator">&amp;</span> <span class="token function">_FUN1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-return">return</span> id<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword keyword-float">float</span><span class="token operator">&amp;</span> <span class="token function">_FUN2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-return">return</span> ratio<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    std<span class="token double-colon punctuation">::</span>map<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token punctuation">,</span>std<span class="token double-colon punctuation">::</span>string<span class="token operator">&gt;</span><span class="token operator">&amp;</span> <span class="token function">_FUN3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-return">return</span> mapping<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword keyword-bool">bool</span><span class="token operator">&amp;</span> <span class="token function">_FUN4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-throw">throw</span> <span class="token string">&quot;member not found!&quot;</span> <span class="token keyword keyword-return">return</span> _GLOBAL_BOOL<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword keyword-bool">bool</span><span class="token operator">&amp;</span> <span class="token function">_FUN5</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-throw">throw</span> <span class="token string">&quot;member not found!&quot;</span> <span class="token keyword keyword-return">return</span> _GLOBAL_BOOL<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    \\<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token keyword keyword-bool">bool</span><span class="token operator">&amp;</span> <span class="token function">_FUN16</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-throw">throw</span> <span class="token string">&quot;member not found!&quot;</span> <span class="token keyword keyword-return">return</span> _GLOBAL_BOOL<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</pre><p>By using <code>#define FUN(T) _FUN##T()</code> macro, we can get the reference of a struct&apos;s member variants:</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp">Demo test<span class="token punctuation">;</span>
+test<span class="token punctuation">.</span><span class="token function">FUN</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">32000</span><span class="token punctuation">;</span>
+</pre><p>All the code of the mentioned way is in <code>src/dumped/include</code>.<br>
+<font color="red"><br>
+Due to three unavoidable drawbacks, the above way is dumped:</font></p><font color="red">
+</font><ol><font color="red">
+<li>The number of reflected member variants are limited due to the way I organized the macro. The upper boundray I set is 16, and once more is needed, I have to add the number list manually.</li>
+<li>Since the <code>FUN()</code> is a macro, it&apos;s processed way before run-time, even before compile time, because of which, a dynamic way of accessing is impossible, there is no way I can <code>demo.FUN(i)</code> where <code>i</code> is a number in run-time.</li>
+</font><li><font color="red">The macro actually defines some member funcitons in the struct that user defined, which is hidden in the back stage.<br>
+</font></li>
+</ol>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-int">int</span> member <span class="token operator">=</span> demo<span class="token punctuation">.</span><span class="token function">_GETINFO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span>member_number<span class="token punctuation">;</span>
+<span class="token keyword keyword-int">int</span> step <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> member<span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span> <span class="token punctuation">;</span>
+step<span class="token operator">+=</span><span class="token function">serilize_node</span><span class="token punctuation">(</span>demo<span class="token punctuation">.</span><span class="token function">FUN</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>data_<span class="token operator">+</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">==</span> member<span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span><span class="token punctuation">;</span>
+step<span class="token operator">+=</span><span class="token function">serilize_node</span><span class="token punctuation">(</span>demo<span class="token punctuation">.</span><span class="token function">FUN</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>data_<span class="token operator">+</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+<span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token number">15</span> <span class="token operator">==</span> member<span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span><span class="token punctuation">;</span>
+step<span class="token operator">+=</span><span class="token function">serilize_node</span><span class="token punctuation">(</span>demo<span class="token punctuation">.</span><span class="token function">FUN</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>data_<span class="token operator">+</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-return">return</span> <span class="token punctuation">;</span>
+<span class="token comment">// awkward code is unavoidable!!</span>
+</pre><h4 class="mume-header" id="current-implementation">Current implementation</h4>
+
+<p>Due to the <code>std::integer_sequence</code> in <code>C++ 14</code>, a compiler-unfolding can be achieved.<br>
+Since a universal function can not return multi-types, the way we access the members is by member pointer and lambuda funtion, not returning the references of the members to the caller function, but to send the process funtion to the callee sub-routine.<br>
+Therefore a <code>std::tuple</code> is needed to store the member pointers, and since its a static data structure, to access it dynamicly, some tricks are needed.<br>
+The code is in <code>src/incldue/Reflection.h</code>.</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token keyword keyword-namespace">namespace</span> detail <span class="token punctuation">{</span>
+
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">Fun</span><span class="token punctuation">,</span> <span class="token keyword keyword-typename">typename</span> <span class="token class-name">Tuple</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>size_t<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> I<span class="token operator">&gt;</span>
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-void">void</span> <span class="token function">ForEachTuple</span><span class="token punctuation">(</span>Tuple<span class="token operator">&amp;&amp;</span> tuple<span class="token punctuation">,</span>
+                                   Fun<span class="token operator">&amp;&amp;</span> fun<span class="token punctuation">,</span>
+                                   std<span class="token double-colon punctuation">::</span>index_sequence<span class="token operator">&lt;</span>I<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     std<span class="token double-colon punctuation">::</span>initializer_list<span class="token operator">&lt;</span><span class="token keyword keyword-int">int</span><span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token function">fun</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span>I<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>tuple<span class="token punctuation">)</span><span class="token punctuation">,</span>I<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">Fun</span><span class="token punctuation">,</span> <span class="token keyword keyword-typename">typename</span> <span class="token class-name">Tuple</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-void">void</span> <span class="token function">ForTuple</span><span class="token punctuation">(</span>Tuple<span class="token operator">&amp;&amp;</span> tuple<span class="token punctuation">,</span> Fun<span class="token operator">&amp;&amp;</span> fun<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">ForEachTuple</span><span class="token punctuation">(</span>tuple<span class="token punctuation">,</span> fun<span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span>make_index_sequence<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>tuple_size<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>decay_t<span class="token operator">&lt;</span>Tuple<span class="token operator">&gt;&gt;</span><span class="token double-colon punctuation">::</span>value<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// struct_schema&lt;T&gt; is the tuple of the struct T</span>
+
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-typename">typename</span> <span class="token class-name">Fn</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-void">void</span> <span class="token function">ForField</span><span class="token punctuation">(</span>T<span class="token operator">&amp;</span> object<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> i<span class="token punctuation">,</span> Fn<span class="token operator">&amp;&amp;</span> fn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  detail<span class="token double-colon punctuation">::</span><span class="token function">ForTuple</span><span class="token punctuation">(</span>struct_schema<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span><span class="token operator">&amp;</span>object<span class="token punctuation">,</span> <span class="token operator">&amp;</span>fn<span class="token punctuation">,</span> <span class="token operator">&amp;</span>i<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword keyword-auto">auto</span><span class="token operator">&amp;&amp;</span> field_schema<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>j <span class="token operator">==</span> i<span class="token punctuation">)</span>
+        <span class="token function">fn</span><span class="token punctuation">(</span>object<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token number">0</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>field_schema<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> std<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">get</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>field_schema<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-else">else</span>
+        <span class="token keyword keyword-return">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>In this way, a dynamic index is used to access the member of the struct, in a static way.</p>
+<h3 class="mume-header" id="template-metaprogram">Template Metaprogram</h3>
+
+<p>To get the objects&apos; type and to judge if a class is a user-defined type, template metaprogram technique is massively used.</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp"><span class="token comment">// get the type of the object, is registered when user-defined type is defined</span>
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token keyword keyword-typename">typename</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> type<span class="token operator">&gt;</span>
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">_is_valid_type</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-const">const</span> Type id <span class="token operator">=</span> OTHER<span class="token punctuation">;</span>
+    <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span> offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-template">template</span><span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token punctuation">,</span><span class="token keyword keyword-typename">typename</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> Types<span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> Type is_valid_type <span class="token operator">=</span> _is_valid_type<span class="token operator">&lt;</span>T<span class="token punctuation">,</span> Types<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>id<span class="token punctuation">;</span>
+<span class="token comment">/**/</span>
+
+
+<span class="token comment">// get the name of the object, is registered when user-defined type is defined</span>
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token keyword keyword-typename">typename</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-auto">auto</span> <span class="token function">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-return">return</span> <span class="token string">&quot;Not_Userdefined_type&quot;</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-struct">struct</span> <span class="token class-name">is_user_defined</span><span class="token operator">&lt;</span>Struct<span class="token operator">&gt;</span> <span class="token operator">:</span> std<span class="token double-colon punctuation">::</span>true_type <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-template">template</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+<span class="token keyword keyword-constexpr">constexpr</span> <span class="token keyword keyword-auto">auto</span> <span class="token generic-function"><span class="token function">ClassName</span><span class="token generic class-name"><span class="token operator">&lt;</span>Struct<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword keyword-return">return</span> #Struct<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+</pre><p>Detailed information is in <code>src/incldue/Reflection.h</code> and <code>src/incldue/TypeFigure.h</code>.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

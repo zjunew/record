@@ -1,0 +1,97 @@
+本次作业中，我们选用5个test,来测试相关的功能。
+其中，创建、拷贝与析构已标出，[]和at()在调用中体现。
+void push_back(const T& x) void inflate();在创建20个对象时体现。
+int size() const直接调用了。
+测试 1，2 ，3测试了int ,float ,double
+其中，at()函数一旦越界，程序报错并结束，所以单独测试4 ， 5。
+
+测试1：
+
+------------------This is a new test about int--------------------
+Vector()
+Now we will test size():
+20
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test Vector(int size):
+Vector(int size):
+Now we will test size():
+0
+Now we will test Vector(const Vector& r):
+Vector(const Vector& r)
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test bool empty() const:
+0
+Now we will test void clear(): we will use empty to identify
+1
+~Vector()
+~Vector()
+~Vector()
+
+测试2 ：
+
+------------------This is a new test about double--------------------
+Vector()
+Now we will test size():
+20
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test Vector(int size):
+Vector(int size):
+Now we will test size():
+0
+Now we will test Vector(const Vector& r):
+Vector(const Vector& r)
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test bool empty() const:
+0
+Now we will test void clear(): we will use empty to identify
+void clear():
+1
+~Vector()
+~Vector()
+~Vector()
+
+测试3：
+
+------------------This is a new test about float--------------------
+Vector()
+Now we will test size():
+20
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test Vector(int size):
+Vector(int size):
+Now we will test size():
+0
+Now we will test Vector(const Vector& r):
+Vector(const Vector& r)
+Now we will test at() and [] ,which also proves that push_back() is useful
+test[]:0 at():1 test[]:2 at():3 test[]:4 at():5 test[]:6 at():7 test[]:8 at():9 test[]:10 at():11 test[]:12 at():13 test[]:14 at():15 test[]:16 at():17 test[]:18 at():19
+Now we will test bool empty() const:
+0
+Now we will test void clear(): we will use empty to identify
+1
+~Vector()
+~Vector()
+~Vector()
+
+测试4：
+
+------------------This is a new test 4--------------------
+Vector()
+correct index: 1
+error index : index <0
+std::out_of_range
+Now we will stop the process.
+
+测试5：
+
+------------------This is a new test 5--------------------
+Vector()
+correct index: 1
+error index : index >= m_nSize
+std::out_of_range
+Now we will stop the process.

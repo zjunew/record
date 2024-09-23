@@ -1,0 +1,14 @@
+.\objects\main.o: USER\Src\main.c
+.\objects\main.o: .\Library\inc\public.h
+.\objects\main.o: .\CMSIS\stm32f10x.h
+.\objects\main.o: .\CMSIS\core_cm3.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+.\objects\main.o: .\CMSIS\system_stm32f10x.h
+.\objects\main.o: .\Library\inc\stm32f10x_conf.h
+.\objects\main.o: .\Library\inc\stm32f10x_gpio.h
+.\objects\main.o: .\CMSIS\stm32f10x.h
+.\objects\main.o: .\Library\inc\stm32f10x_rcc.h
+.\objects\main.o: .\Library\inc\misc.h
+.\objects\main.o: .\USER\stack.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h

@@ -1,0 +1,30 @@
+---------------------     NEW PAGE.  This is the data:  -----------------------
+2024-03-15
+Hello, world.
+---------------------     End of this diary.            -----------------------
+---------------------     NEW PAGE.  This is the data:  -----------------------
+2060-01-02
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I
+I took the one less traveled by,
+And that has made all the difference.
+---------------------     End of this diary.            -----------------------
+---------------------     NEW PAGE.  This is the data:  -----------------------
+1000-10-10
+Early in the day it was whispered that we should sail in a boat, only thou and I
+and never a soul in the world would know of this our pilgrimage to no country and to no end.
+---------------------     End of this diary.            -----------------------
+---------------------     NEW PAGE.  This is the data:  -----------------------
+2035-01-01
+C++ code quality (clean, compact, and reasonable)
+Comments quality
+Common classes and functions should be shared between programs
+These programs are physically independent, so direct interaction is not permitted
+These programs are able to work together by means of redirection
+These programs are able to be used in a shell/batch script.
+---------------------     End of this diary.            -----------------------
+---------------------     NEW PAGE.  This is the data:  -----------------------
+1200-10-10
+Be who you are on the inside.
+---------------------     End of this diary.            -----------------------

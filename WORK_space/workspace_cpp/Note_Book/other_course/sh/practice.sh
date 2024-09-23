@@ -1,0 +1,2 @@
+string="abcd"
+echo ${#string}  

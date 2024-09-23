@@ -1,0 +1,12 @@
+.\objects\iic.o: User\Src\iic.c
+.\objects\iic.o: .\User\Inc\iic.h
+.\objects\iic.o: .\User\Inc\public.h
+.\objects\iic.o: .\CMSIS\stm32f10x.h
+.\objects\iic.o: .\CMSIS\core_cm3.h
+.\objects\iic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\iic.o: .\CMSIS\system_stm32f10x.h
+.\objects\iic.o: .\User\Inc\stm32f10x_conf.h
+.\objects\iic.o: .\StdPeriphDriver\inc\stm32f10x_gpio.h
+.\objects\iic.o: .\CMSIS\stm32f10x.h
+.\objects\iic.o: .\StdPeriphDriver\inc\stm32f10x_rcc.h
+.\objects\iic.o: .\StdPeriphDriver\inc\misc.h

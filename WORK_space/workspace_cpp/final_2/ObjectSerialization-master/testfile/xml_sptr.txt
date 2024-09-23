@@ -1,0 +1,5 @@
+<serialization>
+    <shared_ptr＜int＞>
+        <shared_ptr val="89"/>
+    </shared_ptr＜int＞>
+</serialization>

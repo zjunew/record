@@ -1,0 +1,87 @@
+C51 COMPILER V9.59.0.0   PROJECT2                                                          06/09/2024 16:33:59 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PROJECT2
+OBJECT MODULE PLACED IN .\Objects\project2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\ั้สี\2\project2.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\project2.lst) TABS(2) OBJECT(.\Objects\project2.obj)
+
+line level    source
+
+   1          #include <reg51.h>  
+   2          #include<intrins.h> 
+   3          #define uchar unsigned char  
+   4          #define uint unsigned int  
+   5          static uchar led = 0x01  ;
+   6          unsigned char autoRun = 0;
+   7          void delay(uint i)  
+   8          {  
+   9   1          
+  10   1          while(i--)
+  11   1          { 
+  12   2            uint j =10;
+  13   2            while(j--);
+  14   2          }     
+  15   1      }  
+  16          
+  17          void INT0_ISR(void) interrupt 0 
+  18          {  
+  19   1          
+  20   1          led=_crol_(led,1);  
+  21   1          P0 = led; 
+  22   1          
+  23   1          delay(4500);
+  24   1      }  
+  25          
+  26          
+  27          
+  28          void INT1_ISR(void) interrupt 2 
+  29          {  
+  30   1          if(autoRun == 0) 
+  31   1          {   delay(1000);
+  32   2            autoRun = 1;
+  33   2            
+  34   2          }  
+  35   1          else 
+  36   1          {  delay(1000);
+  37   2              autoRun = 0;  
+  38   2              P0 = 0x00; 
+  39   2            
+  40   2          }  
+  41   1      }  
+  42            
+  43          void main() {  
+  44   1          IT0 = 1; 
+  45   1          IT1 = 0;
+  46   1          EX0 = 1; 
+  47   1          EX1 = 1; 
+  48   1          EA = 1;  
+  49   1        
+  50   1          P0 = 0x00; 
+  51   1        
+  52   1          while(1)
+  53   1          {
+  54   2              if(autoRun)
+C51 COMPILER V9.59.0.0   PROJECT2                                                          06/09/2024 16:33:59 PAGE 2   
+
+  55   2              {
+  56   3                  led=_crol_(led,1);
+  57   3                  P0 = led; 
+  58   3                  delay(1200); 
+  59   3              }
+  60   2          }
+  61   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    220    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      2       2
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

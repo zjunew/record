@@ -1,0 +1,8 @@
+.DS_Store
+.vscode
+Makefile2
+build
+bin
+Req.md
+log.txt
+*.zip

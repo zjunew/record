@@ -1,0 +1,687 @@
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE OTHER
+OBJECT MODULE PLACED IN .\Objects\other.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\forth_pro\other.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.
+                    -\Listings\other.lst) TABS(2) OBJECT(.\Objects\other.obj)
+
+line level    source
+
+   1          #include <stm32f10x_lib.h>
+*** WARNING C318 IN LINE 1 OF ..\forth_pro\other.c: can't open file 'stm32f10x_lib.h'
+   2          /********************************硬件接口定义*********************************/
+   3          #define RS  GPIO_Pin_1 //P2^6; 
+   4          #define RW  GPIO_Pin_2 //P2^5;
+   5          #define EN  GPIO_Pin_0 //P2^7;
+   6          
+   7          /********************************宏定义*********************************/
+   8          #define    LCD_RS(x)  x ? GPIO_SetBits(GPIOB, RS): GPIO_ResetBits(GPIOB, RS)
+   9          #define    LCD_RW(x)  x ? GPIO_SetBits(GPIOB, RW): GPIO_ResetBits(GPIOB, RW)
+  10          #define    LCD_EN(x)  x ? GPIO_SetBits(GPIOB, EN): GPIO_ResetBits(GPIOB, EN)
+  11          
+  12          /********************** 变量定义 ---------------------------*/
+  13          GPIO_InitTypeDef GPIO_InitStructure;     //GPIO
+*** ERROR C129 IN LINE 13 OF ..\forth_pro\other.c: missing ';' before 'GPIO_InitStructure'
+  14          ErrorStatus HSEStartUpStatus; 
+  15          typedef unsigned char BYTE;
+  16          typedef unsigned char BOOL; 
+  17          
+  18          BYTE dis1[] = {"H "};
+  19          BYTE dis2[] = {" "};
+  20          BYTE dis_buf=0;            //显示缓存
+  21          BYTE temp;
+  22          BYTE key;                //键顺序码
+  23          BYTE fuhao=32;
+  24          BYTE flag=0;
+  25          BYTE flag_buf=0;
+  26          BYTE flag_fuhao=0;
+  27          BYTE flag_fuhao2=0;
+  28          BYTE j,m,n;
+  29          int i=0;
+  30          int operand[15] = {0};                /*数字数组，初始化*/
+  31          int  top_num = -1;
+  32          BYTE oper[15] = {0};                  /*操作符数组，初始化*/
+  33          int top_oper = -1;   
+  34          BYTE* temp_p;              // 数组指针
+  35          BYTE* str = dis1;
+  36          BYTE dest[15];
+  37          int num = 0; 
+  38          
+  39          /***************声明函数 ---------------*/
+  40          void RCC_Configuration(void);//RCC初始化
+  41          void NVIC_Configuration(void);  //NVIC初始化
+  42          void NOP(void);   //延时周期
+  43          void Delay(vu32 nCount);   //延时程序
+  44          void delay0(BYTE x);      //延时子程序
+  45          void keyscan(void);    // 矩阵键盘扫描子程序
+  46          void duli_keyscan(void);  //独立按键扫描子程序
+  47          void keydown(void);     //判断键盘键是否按下
+  48          void calculate(void);     //判断键盘键是否按下
+  49          void result2char(void);   //计算表达式的值
+  50          void LCD(void); //LCD显示
+  51          int insert_operand(int *operand , int * top_num ,BYTE num);//数据压入数据栈 
+  52          int insert_oper (BYTE * oper , int *top_oper , char ch);//操作符压入符号栈
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 2   
+
+  53          int compare(BYTE *oper , int *top_oper , BYTE ch);//比较操作服优先级
+  54          int deal_date(int *operand ,BYTE *oper ,int *top_num, int *top_oper);//进行数据运算
+  55          
+  56          //RCC初始化
+  57          void RCC_Configuration(void)
+  58          {   
+  59           //复位RCC外部设备寄存器到默认值
+  60            RCC_DeInit();
+  61            //打开外部高速晶振
+  62            RCC_HSEConfig(RCC_HSE_ON);
+  63             //等待外部高速时钟准备好
+  64            HSEStartUpStatus = RCC_WaitForHSEStartUp();
+  65            if(HSEStartUpStatus == SUCCESS)   //外部高速时钟已经准别好
+  66            {                   
+  67              //开启FLASH的预取功能
+  68              FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+  69              //FLASH延迟2个周期
+  70              FLASH_SetLatency(FLASH_Latency_2);  
+  71            //配置AHB(HCLK)时钟=SYSCLK
+  72              RCC_HCLKConfig(RCC_SYSCLK_Div1);    
+  73             //配置APB2(PCLK2)钟=AHB时钟
+  74              RCC_PCLK2Config(RCC_HCLK_Div1); 
+  75              //配置APB1(PCLK1)钟=AHB 1/2时钟
+  76              RCC_PCLK1Config(RCC_HCLK_Div2);
+  77               //配置PLL时钟 == 外部高速晶体时钟*9 PLLCLK = 8MHz * 9 = 72 MHz 
+  78              RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);
+  79              //使能PLL时钟
+  80              RCC_PLLCmd(ENABLE);
+  81             //等待PLL时钟就绪
+  82              while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
+  83              {
+  84              }
+  85            //配置系统时钟 = PLL时钟
+  86              RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+  87             //检查PLL时钟是否作为系统时钟
+  88              while(RCC_GetSYSCLKSource() != 0x08)
+  89              {
+  90              }
+  91            }
+  92          }
+  93          
+  94          //NVIC初始化
+  95          void NVIC_Configuration(void)
+  96          {
+  97           NVIC_InitTypeDef NVIC_InitStructure;
+  98          #ifdef  VECT_TAB_RAM  
+                NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0); 
+              #else  /* VECT_TAB_FLASH */ 
+ 101            NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);   
+ 102          #endif
+ 103            NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQChannel;
+ 104            NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+ 105            NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+ 106            NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+ 107            NVIC_Init(&NVIC_InitStructure);
+ 108          }
+ 109          #ifdef  DEBUG
+              
+              //**延时函数*
+              void NOP()
+              { vu16 i;
+                for(i=0; i<100; i++); 
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 3   
+
+              }
+              
+              //延时函数
+              void delay(vu32 nCount)
+              {
+                for(; nCount != 0; nCount--);
+              }
+              
+              void assert_failed(u8* file, u32 line)
+              { 
+                while (1)
+                {
+                }
+              }
+              #endif
+ 130          
+ 131          //延时子程序 
+ 132          void  delay0(BYTE x)
+ 133          { BYTE j;
+ 134              while((x--)!=0)  //CPU执行x*12次
+ 135              { for(j=0;j<125;j++)
+ 136                   {;}
+ 137              }
+ 138          }
+ 139          
+ 140          void result2char(void)    //将计算结果转化为可显示的字符串
+ 141          {
+ 142            dis2[5]=operand[0]%10+48;
+ 143             dis2[4]=operand[0]/10%10+48;
+ 144             dis2[3]=operand[0]/100%10+48;
+ 145             dis2[2]=operand[0]/1000%10+48;
+ 146             dis2[1]=operand[0]/10000%10+48;
+ 147             dis2[0]=operand[0]/100000%10+48;
+ 148             if(dis2[0]==48)
+ 149             {  dis2[0]=32;
+ 150              if(dis2[1]==48)  
+ 151              { dis2[1]=32;
+ 152                if(dis2[2]==48)  
+ 153                { dis2[2]=32;
+ 154                  if(dis2[3]==48)  
+ 155                  { dis2[3]=32;
+ 156                    if(dis2[4]==48)  
+ 157                    { dis2[4]=32; }
+ 158                  }
+ 159                }
+ 160              }
+ 161            }
+ 162          }
+ 163          
+ 164          void calculate(void)      //判断键盘键是否按下
+ 165          {
+ 166            i = 0;
+ 167             str++;
+ 168               while(*str != '\0')
+ 169               {
+ 170                  temp_p = dest;
+ 171              m=0;
+ 172                  while(*str >= 48 && *str <= 57)           /*判断是否是数据*/
+ 173                  {
+ 174                      *temp_p = *str;
+ 175                      str ++;
+ 176                      temp_p ++;
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 4   
+
+ 177                m++;                
+ 178                  }                               /*遇到符号退出*/
+ 179                  if(*str != '(' && *(temp_p - 1) != '\0')      /*判断符号是否为'('*/
+ 180                  {
+ 181                      *temp_p = '\0';
+ 182                      num = atoi(dest);               /*将字符串转为数字*/
+ 183                      insert_operand(operand, &top_num,num);      /*将数据压入数据栈*/
+ 184                  }
+ 185                   while(1)        
+ 186                   {
+ 187                       i = compare(oper,&top_oper,*str);      /*判断操作符优先级*/
+ 188                      if(i == 0)
+ 189                      {
+ 190                          insert_oper(oper,&top_oper,*str);   /*压入操作符*/
+ 191                          break;
+ 192                      }
+ 193                      else if(i == 1)                         /*判断括号内的表达式是否结束*/
+ 194                      {
+ 195                          str++;
+ 196                      }
+ 197                      else if(i == -1)                        /*进行数据处理*/
+ 198                      {
+ 199                          deal_date(operand,oper,&top_num,&top_oper);
+ 200                      }
+ 201                   }
+ 202                  str ++;
+ 203            }
+ 204          }
+ 205                                                                    
+ 206          //键扫描子程序 (4*3 的矩阵) P0.4 P0.5 P0.6 P0.7为行 
+ 207          void keyscan(void)
+ 208           {  temp = 0;
+ 209            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 |  GPIO_Pin_1 |  GPIO_Pin_2 |  GPIO_Pin_3 ; // 选择所有脚
+ 210              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  //配置成推挽式输出
+ 211              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 212              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 213            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |  GPIO_Pin_5 |  GPIO_Pin_6 |  GPIO_Pin_7 ; // 选择所有脚
+ 214              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  //配置成推挽式输出
+ 215              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 216              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 217            GPIO_Write(GPIOB,0X00F0); //初始化端口
+ 218              delay0(1);         //延时
+ 219              temp=(GPIO_ReadInputData(GPIOB))&0xF0;   //高8位的屏蔽低四位
+ 220              temp=~((temp>>4)|0x00F0); //将高四位移到地位处处理 
+ 221              if(temp==1)   // p0.4 被拉低
+ 222              {    key=1;   //第一个按键值
+ 223              flag_buf=1;
+ 224              }else if(temp==2)   // p0.5 被拉低
+ 225              {    key=2;  //第2个按键值
+ 226              flag_buf=1;
+ 227              }else if(temp==4)   // p0.6 被拉低
+ 228              {    key=3;   //第3个按键值
+ 229              flag_buf=1;
+ 230              }else if(temp==8)   // p0.7 被拉低
+ 231              {     key=4;     //第4个按键值
+ 232               flag_buf=1;
+ 233              }else key=16;
+ 234          
+ 235              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 |  GPIO_Pin_1 |  GPIO_Pin_2 |  GPIO_Pin_3 ; // 选择所有�
+             -�
+ 236              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  //配置成推挽式输出
+ 237              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 5   
+
+ 238              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 239            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |  GPIO_Pin_5 |  GPIO_Pin_6 |  GPIO_Pin_7 ; // 选择所有脚
+ 240              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  //配置成推挽式输出
+ 241              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 242              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 243            GPIO_Write(GPIOB,0X000F);
+ 244              delay0(1);       //延时
+ 245              temp=(GPIO_ReadInputData(GPIOB))&0x0F;
+ 246              temp=~(temp|0xF0);
+ 247            if(temp==1)      //p0.0 被拉低
+ 248              {    key=key+0;
+ 249              flag_buf=1;
+ 250              }else if(temp==2)      //p0.1 被拉低
+ 251              {    key=key+4;
+ 252              flag_buf=1;
+ 253              }else if(temp==4)   //p0.2 被拉低
+ 254              {    key=key+8;
+ 255              flag_buf=1;
+ 256              }else if(temp==8) //p0.3 被拉低
+ 257              {   key=key+12;
+ 258              flag_buf=1;
+ 259              }else   key=16;  
+ 260          
+ 261            if(key==11) {fuhao=40; flag_fuhao=1 ;flag_fuhao2=1;flag_buf=0;}
+ 262            if(key==12) {fuhao=41; flag_fuhao=1 ;flag_fuhao2=1;flag_buf=0;}     
+ 263              dis_buf = key;      //键值入显示缓存
+ 264              dis_buf = dis_buf & 0x0f;
+ 265          }
+ 266          
+ 267          //独立键盘扫描子程序 (2*4 的矩阵) P0.4 P0.5 P0.6 P0.7为行 
+ 268          void  duli_keyscan(void)
+ 269          {
+ 270            temp = 0;
+ 271            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All; //所有GPIO为同一类型端口
+ 272            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   //推挽输出
+ 273            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  //输出的最大频率为50HZ
+ 274            GPIO_Init(GPIOA, &GPIO_InitStructure);   //初始化GPIOA端口
+ 275          
+ 276            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 |  GPIO_Pin_1 | GPIO_Pin_2 |  GPIO_Pin_3 | GPIO_Pin_4 |  GPIO_Pi
+             -n_5 |  GPIO_Pin_6 |  GPIO_Pin_7 ; // 选择所有脚
+ 277              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  //配置成推挽式输出
+ 278              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 279              GPIO_Init(GPIOA, &GPIO_InitStructure);  //初PB口始化
+ 280          
+ 281            GPIO_Write(GPIOA,0X00FF); //初始化端口
+ 282              delay0(1);         //延时
+ 283              temp=(GPIO_ReadInputData(GPIOA)) &0x00FF;  //高8位的屏蔽低四位
+ 284              temp=~temp; //将高四位移到地位处处理 
+ 285              if(temp==16)    // p0.4 被拉低
+ 286              {   fuhao=43;   //第一个按键值
+ 287              flag_fuhao=1;
+ 288              flag_fuhao2=1;
+ 289              }
+ 290            else if(temp==32)   // p0.5 被拉低
+ 291              {    fuhao=45;   //第2个按键值
+ 292              flag_fuhao=2;
+ 293              flag_fuhao2=1;
+ 294              }
+ 295            else if(temp==64)   // p0.6 被拉低
+ 296              {    fuhao=42;    //第3个按键值
+ 297              flag_fuhao=3;
+ 298              flag_fuhao2=1;
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 6   
+
+ 299              }
+ 300            else if(temp==128)   // p0.7 被拉低
+ 301              {    fuhao=47;     //第4个按键值
+ 302              flag_fuhao=4;
+ 303              flag_fuhao2=1;
+ 304              }
+ 305            else if(temp==4)   // p0.6 被拉低
+ 306              {    fuhao=40;    //第3个按键值
+ 307              flag_fuhao=3;
+ 308              flag_fuhao2=1;
+ 309              }
+ 310            else if(temp==8)   // p0.7 被拉低
+ 311              {    fuhao=41;     //第4个按键值
+ 312              flag_fuhao=4;
+ 313              flag_fuhao2=1;
+ 314              }
+ 315            else if(temp==1)
+ 316              {    //fuhao=61;
+ 317              flag=1;
+ 318            }
+ 319            else if(temp!=0)
+ 320            {  flag=2;} 
+ 321          }
+ 322          
+ 323          //函数：判断键是否按下 
+ 324           void  keydown(void)
+ 325           {   int retval;
+ 326              //P1=0xF0; //将高4位全部置1 低四位全部置0
+ 327            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 |  GPIO_Pin_1 |  GPIO_Pin_2 |  GPIO_Pin_3 ; // 选择所有脚
+ 328              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  //配置成推挽式输出
+ 329              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 330              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 331          
+ 332            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 |  GPIO_Pin_5 |  GPIO_Pin_6 |  GPIO_Pin_7 ; // 选择所有脚
+ 333              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;  //配置成悬浮输入
+ 334              GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; //输出模式下 I/O输出速度 50M HZ
+ 335              GPIO_Init(GPIOB, &GPIO_InitStructure);  //初PB口始化
+ 336          
+ 337            GPIO_Write(GPIOB,0X00F0);
+ 338            //P1!=0xF0
+ 339            retval =  GPIO_ReadInputData(GPIOB); //读PB口状态
+ 340            if(retval !=0xF0)  //判断按键是否按下 如果按钮按下 会拉低P1其中的一个端口
+ 341            {
+ 342              keyscan();  //调用按键扫描程序
+ 343              }
+ 344          }
+ 345            
+ 346          
+ 347          /*数据压入数据栈*/
+ 348          int insert_operand(int *operand , int * top_num ,BYTE num)           /*数据压入数据栈*/
+ 349          {
+ 350              (*top_num) ++;
+ 351              operand[*top_num] = num;                    /*保存数据*/   
+ 352              return 0;                           /*正常退出*/
+ 353          }
+ 354           
+ 355           /*操作符压入符号栈*/
+ 356          int insert_oper (BYTE * oper , int *top_oper , char ch)             /*操作符压入符号栈*/
+ 357          {
+ 358              (*top_oper)++;
+ 359              oper[*top_oper] = ch;                       /*保存操作符*/
+ 360              return 0;                           /*正常退出*/
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 7   
+
+ 361          }
+ 362          
+ 363          /*比较操作服优先级*/ 
+ 364          int compare(BYTE *oper , int *top_oper , BYTE ch)                   /*比较操作服优先级*/
+ 365          {      
+ 366              if((oper[*top_oper] == '-' || oper[*top_oper] == '+')           /*判断当前优先级是否比栈顶
+             -操作符优先级高*/
+ 367                      && (ch == '*' || ch == '/'))
+ 368              {
+ 369                  return 0;                      /*操作符压入栈*/ 
+ 370              } 
+ 371              else if(*top_oper == -1 || ch == '(' 
+ 372                      || (oper[*top_oper] == '(' && ch != ')'))       /*判断操作符栈是否为空；栈顶操�
+             -� 符是否为'('*/
+ 373              {
+ 374                  return 0;                       /*操作符压入栈*/
+ 375              } 
+ 376              else if (oper[*top_oper] =='(' && ch == ')' )       /*判断括号内的表达式是否计算完毕*/
+ 377              {
+ 378                  (*top_oper)--;
+ 379                  return 1;                       /*对（）进行处理*/
+ 380              } 
+ 381              else
+ 382              {
+ 383                  return -1;                                          /*进行操作符的运算*/
+ 384              }
+ 385          }
+ 386          
+ 387          /*进行数据运算*/ 
+ 388          int deal_date(int *operand ,BYTE *oper ,int *top_num, int *top_oper)    /*进行数据运算*/
+ 389          {
+ 390              int num_1 = operand[*top_num];              /*取出数据栈中两个数据*/
+ 391              int num_2 = operand[*top_num - 1];
+ 392              int value = 0;
+ 393              if(oper[*top_oper] == '+')                  /*加法操作*/
+ 394              {
+ 395                  value = num_1 + num_2;
+ 396              } 
+ 397              else if(oper[*top_oper] == '-')             /*减法操作*/
+ 398              {
+ 399                  value = num_2 - num_1;
+ 400              } 
+ 401              else if(oper[*top_oper] == '*')             /*乘法操作*/
+ 402              {
+ 403                  value = num_2 * num_1;
+ 404              }
+ 405              else if(oper[*top_oper] == '/')             /*除法操作*/
+ 406              {
+ 407                  value = num_2 / num_1;
+ 408              }
+ 409              (*top_num) --;                              /*将数据栈顶下移一位*/
+ 410              operand[*top_num] = value;                  /*将得到的值压入数据栈*/
+ 411              (*top_oper) --;                             /*将操作符栈顶下移一位*/ 
+ 412          }
+ 413          
+ 414          /***********测试LCD繁忙状态**********************/  
+ 415          BOOL lcd_bz()
+ 416          {                         // 测试LCD忙碌状态
+ 417            BOOL result;
+ 418            LCD_RS(0);  //0;
+ 419            LCD_RW(1);  //1;
+ 420            LCD_EN(1);  //1;
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 8   
+
+ 421            NOP();
+ 422            NOP();
+ 423            result = (GPIO_ReadInputData(GPIOB) & 0x8000)>>8;
+ 424            LCD_EN(0); // 0;
+ 425            return result; 
+ 426          }
+ 427          /*********写命令****************/  
+ 428          lcd_wcmd(long cmd)
+ 429          {                          // 写入指令数据到LCD
+ 430          // while(lcd_bz());
+ 431            LCD_RS(0); // 0;
+ 432            LCD_RW(0); // 0;
+ 433            LCD_EN(0); // 0;
+ 434            NOP();
+ 435            NOP(); 
+ 436            GPIOB->BSRR = cmd<<8 & 0xf000;  //将数据送到P0口 
+ 437              GPIOB->BRR = ((~cmd)<<8) & 0xf000;
+ 438            NOP();
+ 439            NOP();  
+ 440            LCD_EN(1); // 1;
+ 441            NOP();  
+ 442            NOP();  
+ 443            LCD_EN(0); // 0; 
+ 444          }
+ 445          
+ 446          lcd_wcmd_4bit(long cmd)
+ 447          {                          // 写入指令数据到LCD
+ 448            while(lcd_bz());
+ 449            LCD_RS(0); // 0;
+ 450            LCD_RW(0); // 0;
+ 451            LCD_EN(0); // 0;
+ 452            NOP();
+ 453            NOP();   NOP();
+ 454            NOP();
+ 455            GPIOB->BSRR = cmd<<8 & 0xf000;  //将数据送到P0口 
+ 456              GPIOB->BRR = ((~cmd)<<8) & 0xf000;
+ 457            NOP();   NOP();
+ 458            NOP();
+ 459            NOP();  
+ 460            LCD_EN(1); // 1;
+ 461            NOP();  
+ 462            NOP();  NOP();
+ 463            NOP();
+ 464            LCD_EN(0); // 0; 
+ 465            LCD_RS(0); //= 1;
+ 466            LCD_RW(0); //= 0;
+ 467            LCD_EN(0); //= 0;
+ 468            NOP();
+ 469            NOP();   NOP();
+ 470            NOP();
+ 471            GPIOB->BSRR = cmd<<12 & 0xf000;  //将数据送到P0口 
+ 472              GPIOB->BRR = ((~cmd)<<12) & 0xf000;
+ 473            NOP();
+ 474            NOP();   NOP();
+ 475            NOP();
+ 476            LCD_EN(1); // 1;
+ 477            NOP();  
+ 478            NOP();  NOP();
+ 479            NOP();
+ 480            LCD_EN(0); // 0; 
+ 481          }
+ 482            
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 9   
+
+ 483          lcd_pos(long pos)
+ 484          {                          //设定显示位置
+ 485            lcd_wcmd_4bit(pos | 0x0080);
+ 486          }                  
+ 487          
+ 488          lcd_init()        //LCD初始化设定
+ 489          {                       
+ 490            lcd_wcmd(0x38);          //16*2显示，5*7点阵，8位数据
+ 491            delay(20000);
+ 492            lcd_wcmd(0x38);          //16*2显示，5*7点阵，8位数据 /
+ 493            delay(20000);
+ 494            lcd_wcmd(0x28);          //16*2显示，5*7点阵，8位数据
+ 495            delay(20000);
+ 496            lcd_wcmd_4bit(0x28);          //16*2显示，5*7点阵，8位数据
+ 497            delay(20000);
+ 498            lcd_wcmd_4bit(0x0c);          //显示开，关光标
+ 499            delay(20000);
+ 500            lcd_wcmd_4bit(0x02);          //移动光标
+ 501            delay(20000);
+ 502            lcd_wcmd_4bit(0x01);          //清除LCD的显示内容
+ 503            delay(20000);
+ 504          }
+ 505          
+ 506          /*****************写数据***********************/ 
+ 507          lcd_wdat( long dat) 
+ 508          {                          //写入字符显示数据到LCD
+ 509            while(lcd_bz());
+ 510            LCD_RS(1); //= 1;
+ 511            LCD_RW(0); //= 0;
+ 512            LCD_EN(0); //= 0;
+ 513            
+ 514            GPIOB->BSRR = dat<<8 & 0xf000;    P0 = dat
+ 515              GPIOB->BRR = ((~dat)<<8) & 0xf000;
+ 516            NOP();
+ 517            NOP();
+ 518            NOP();
+ 519            NOP();
+ 520            LCD_EN(1);// = 1;
+ 521            NOP();
+ 522            NOP();
+ 523            NOP();
+ 524            NOP();
+ 525            LCD_EN(0);// = 0; 
+ 526          
+ 527            LCD_RS(1); //= 1;
+ 528            LCD_RW(0); //= 0;
+ 529            LCD_EN(0); //= 0;
+ 530            NOP();
+ 531            NOP();
+ 532            NOP();
+ 533            NOP();
+ 534            GPIOB->BSRR = dat<<12 & 0xf000;    P0 = dat
+ 535              GPIOB->BRR = ((~dat)<<12) & 0xf000;
+ 536            NOP();
+ 537            NOP();
+ 538            NOP();
+ 539            NOP();
+ 540            LCD_EN(1);// = 1;
+ 541            NOP();
+ 542            NOP();
+ 543            NOP();
+ 544            NOP();
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 10  
+
+ 545            LCD_EN(0);// = 0; 
+ 546          }
+ 547          
+ 548          void LCD(void)
+ 549          {
+ 550            lcd_wcmd_4bit(0x06);            //向右移动光标
+ 551                lcd_pos(0);                //设置显示位置为第一行的第1个字符
+ 552                i = 0;
+ 553               while(dis1[ i ] != '\0')
+ 554               {                           //显示字符
+ 555                 lcd_wdat(dis1[ i ]);
+ 556                 i++;
+ 557                 delay(20000);                //控制两字之间显示速度
+ 558               }
+ 559                lcd_pos(0x40);             //设置显示位置为第二行第1个字符
+ 560                i = 0;
+ 561               while(dis2[ i ] != '\0')
+ 562               {
+ 563                 lcd_wdat(dis2[ i ]);      //显示字符
+ 564                 i++;
+ 565                 delay(20000);                //控制两字之间显示速度
+ 566               }
+ 567                delay(800000);                //控制停留时间 
+ 568          } 
+ 569            
+ 570          main()
+ 571          {
+ 572            j=1;
+ 573            #ifdef DEBUG
+                //debug(); //在线调试使用
+                #endif  
+ 576            RCC_Configuration();      //系统时钟配置函数 
+ 577            NVIC_Configuration();     //NVIC配置函数 
+ 578            RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB1Periph_TIM2 | RCC_APB2Periph
+             -_AFIO, ENABLE);//启动GPIO模块时钟 
+ 579            GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable,ENABLE);  //把调试设置普通IO口 
+ 580            GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All; //所有GPIO为同一类型端口
+ 581            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;   //推挽输出
+ 582            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  //输出的最大频率为50HZ
+ 583            GPIO_Init(GPIOA, &GPIO_InitStructure);   //初始化GPIOA端口
+ 584            GPIO_Init(GPIOB, &GPIO_InitStructure);   //初始化GPIOB端口
+ 585              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 |GPIO_Pin_12 | GPIO_
+             -Pin_13 | GPIO_Pin_14 | GPIO_Pin_15; //所有GPIO为同一类型端口
+ 586            GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;   //开漏输出
+ 587            GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;  //输出的最大频率为50HZ
+ 588            GPIO_Init(GPIOB, &GPIO_InitStructure);   //初始化GPIOB端口
+ 589            GPIO_Write(GPIOA,0xffff);  //将GPIOA 16个端口全部置为高电平
+ 590            GPIO_Write(GPIOB,0xffff);  //将GPIOB 16个端口全部置为高电
+ 591            lcd_init();               // 初始化LCD
+ 592              delay(10);  
+ 593          
+ 594             while(1)              
+ 595             {   
+ 596              //输入表达式：矩阵键盘输入数字，独立键盘输入符号 
+ 597              while(flag_buf==0 && flag_fuhao2==0 && flag ==0)
+ 598              {
+ 599                keydown();   //矩阵按键检测
+ 600                delay(20);
+ 601                duli_keyscan();  //独立按键检测
+ 602                delay(20);
+ 603                lcd_wcmd_4bit(0x01);//清除LCD的内容
+ 604                delay(2000);
+C51 COMPILER V9.59.0.0   OTHER                                                             05/26/2024 16:53:38 PAGE 11  
+
+ 605                LCD();   //实时显示按键的表达式
+ 606              }
+ 607             //如果有输入数字，将其显示在LCD屏上
+ 608              if(flag_buf!=0)
+ 609              {
+ 610               dis1[j]=dis_buf+48;
+ 611              }
+ 612              //如果有输入符号，将其显示在LCD屏上
+ 613              else if(flag_fuhao2!=0)
+ 614              {
+ 615               dis1[j]=fuhao;
+ 616              }
+ 617              //清除flag值
+ 618              j++;
+ 619              flag_buf=0;
+ 620              flag_fuhao=0;
+ 621              flag_fuhao2=0;            
+ 622              if(flag==1)    
+ 623              {              
+ 624               calculate(); //计算表达式的值 
+ 625               result2char();//将计算结果转化为字符串
+ 626               dis2[0]=61;  //输入“=”
+ 627               flag_fuhao=0;    //清空flag
+ 628               flag=0;
+ 629              }
+ 630              //如果有清屏指令，则清除屏幕，重新开始输入
+ 631              if(flag==2)   
+ 632              {
+ 633                flag=0;
+ 634              j=1;
+ 635              for(m=0;m<16;m++)
+ 636              {
+ 637                 dis1[m]=32;
+ 638                }
+ 639              for(m=0;m<16;m++)
+ 640              {
+ 641                 dis2[m]=32;
+ 642                }
+ 643                delay(2000);
+ 644                LCD();
+ 645                } 
+ 646             }
+ 647          }
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)

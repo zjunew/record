@@ -1,0 +1,214 @@
+A51 MACRO ASSEMBLER  HELP                                                                 05/11/2024 16:43:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\help.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\help.asm SET(SMALL) DEBUG PRINT(.\Listings\help.lst) OBJECT(.\Object
+                      s\help.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+0000 02005E            2             LJMP START
+0050                   3             ORG 0050H
+0050                   4     TABLE:
+0050 3F065B4F          5         DB 63, 6, 91, 79, 102 ,109 ,125, 7, 127,111,119,115,64,0
+0054 666D7D07                
+0058 7F6F7773                
+005C 4000                    
+                       6     
+005E                   7     START:
+005E 7804              8             MOV R0 , #4
+0060 1164              9             ACALL GET_VALUE
+0062 80FA             10             SJMP START
+                      11     
+0064                  12     GET_VALUE:          
+0064 90006B           13         MOV DPTR, #ALGO
+0067 E8               14             MOV A , R0
+0068 28               15             ADD A, R0
+0069 73               16         JMP @A+DPTR     
+006A 22               17         RET
+                      18     
+006B                  19     ALGO:
+006B 0187             20             AJMP SUB0
+006D 019F             21             AJMP SUB1
+006F 01A6             22                     AJMP SUB2
+0071 01A7             23                     AJMP SUB3
+0073 01A8             24                     AJMP SUB4
+0075 01BF             25                     AJMP SUB5
+0077 01D5             26                     AJMP SUB6
+0079 01D6             27                     AJMP SUB7
+007B 01D7             28                     AJMP SUB8
+007D 01EE             29                     AJMP SUB9
+007F 2104             30                     AJMP SUB10
+0081 2105             31                     AJMP SUB11
+0083 2106             32                     AJMP SUB12
+0085 211D             33                     AJMP SUB13
+                      34         
+0087                  35     SUB0:
+0087 E540             36         MOV A, 40H
+0089 600A             37         JZ CERATEA
+008B 753077           38         MOV 30H , #119
+008E 753140           39         MOV 31H , #64
+0091 754000           40         MOV 40H , #0
+0094 22               41         RET
+                      42     
+0095                  43     CERATEA:
+0095 753073           44         MOV 30H , #115
+0098 753140           45         MOV 31H , #64
+009B 754001           46         MOV 40H , #1
+009E 22               47         RET
+                      48     
+009F                  49     SUB1:
+009F 753000           50         MOV 30H , #0
+00A2 753100           51         MOV 31H , #0
+                      52         
+00A5 22               53         RET
+00A6                  54     SUB2:
+A51 MACRO ASSEMBLER  HELP                                                                 05/11/2024 16:43:00 PAGE     2
+
+00A6 22               55             RET
+00A7                  56     SUB3:
+00A7 22               57             RET
+00A8                  58     SUB4:
+00A8 A942             59         MOV R1,  42H
+00AA E9               60         MOV A , R1
+00AB 2401             61         ADD A, #1
+00AD F542             62         MOV 42H , A
+00AF 75F00A           63         MOV B, #10
+00B2 84               64         DIV AB
+00B3 FA               65         MOV R2 ,A
+00B4 3133             66         ACALL GET_SQUARE
+00B6 8A32             67         MOV 32H, R2
+00B8 AAF0             68         MOV R2 ,B
+00BA 3133             69         ACALL GET_SQUARE
+00BC 8A33             70         MOV 33H ,R2
+00BE 22               71         RET
+00BF                  72     SUB5:
+00BF A942             73         MOV R1,  42H
+00C1 E9               74         MOV A , R1
+00C2 14               75         DEC A
+00C3 F542             76         MOV 42H , A
+00C5 75F00A           77         MOV B, #10
+00C8 84               78         DIV AB
+00C9 FA               79         MOV R2 ,A
+00CA 3133             80         ACALL GET_SQUARE
+00CC 8A32             81         MOV 32H, R2
+00CE AAF0             82         MOV R2 ,B
+00D0 3133             83         ACALL GET_SQUARE
+00D2 8A33             84         MOV 33H ,R2
+00D4 22               85         RET
+00D5                  86     SUB6:
+00D5 22               87             RET
+00D6                  88     SUB7:
+00D6 22               89             RET
+                      90     
+00D7                  91     SUB8:
+00D7 A943             92         MOV R1,  43H
+00D9 E9               93         MOV A , R1
+00DA 2401             94         ADD A, #1
+00DC F543             95         MOV 43H , A
+00DE 75F00A           96         MOV B, #10
+00E1 84               97         DIV AB
+00E2 FA               98         MOV R2 ,A
+00E3 3133             99         ACALL GET_SQUARE
+00E5 8A34            100         MOV 34H, R2
+00E7 AAF0            101         MOV R2 ,B
+00E9 3133            102         ACALL GET_SQUARE
+00EB 8A35            103         MOV 35H ,R2
+00ED 22              104         RET
+00EE                 105     SUB9:
+00EE A943            106         MOV R1,  43H
+00F0 E9              107         MOV A , R1
+00F1 14              108         DEC A
+00F2 F543            109         MOV 43H , A
+00F4 75F00A          110         MOV B, #10
+00F7 84              111         DIV AB
+00F8 FA              112         MOV R2 ,A
+00F9 3133            113         ACALL GET_SQUARE
+00FB 8A34            114         MOV 34H, R2
+00FD AAF0            115         MOV R2 ,B
+00FF 3133            116         ACALL GET_SQUARE
+0101 8A35            117         MOV 35H ,R2
+0103 22              118         RET
+                     119     
+0104                 120     SUB10:
+A51 MACRO ASSEMBLER  HELP                                                                 05/11/2024 16:43:00 PAGE     3
+
+0104 22              121             RET
+0105                 122     SUB11:
+0105 22              123             RET
+                     124     
+0106                 125     SUB12:
+0106 A944            126         MOV R1,  44H
+0108 E9              127         MOV A , R1
+0109 2401            128         ADD A, #1
+010B F544            129         MOV 44H , A
+010D 75F00A          130         MOV B, #10
+0110 84              131         DIV AB
+0111 FA              132         MOV R2 ,A
+0112 3133            133         ACALL GET_SQUARE
+0114 8A36            134         MOV 36H, R2
+0116 AAF0            135         MOV R2 ,B
+0118 3133            136         ACALL GET_SQUARE
+011A 8A37            137         MOV 37H ,R2
+011C 22              138         RET
+011D                 139     SUB13:
+011D A944            140         MOV R1,  44H
+011F E9              141         MOV A , R1
+0120 14              142         DEC A
+0121 F544            143         MOV 44H , A
+0123 75F00A          144         MOV B, #10
+0126 84              145         DIV AB
+0127 FA              146         MOV R2 ,A
+0128 3133            147         ACALL GET_SQUARE
+012A 8A36            148         MOV 36H, R2
+012C AAF0            149         MOV R2 ,B
+012E 3133            150         ACALL GET_SQUARE
+0130 8A37            151         MOV 37H ,R2
+0132 22              152         RET
+                     153     
+0133                 154     GET_SQUARE:          
+0133 900050          155         MOV DPTR, #TABLE
+0136 EA              156             MOV A , R2
+0137 93              157         MOVC A, @A+DPTR     
+0138 FA              158             MOV R2 , A     
+0139 E4              159             CLR A
+013A 22              160         RET
+                     161     
+                     162     END
+A51 MACRO ASSEMBLER  HELP                                                                 05/11/2024 16:43:00 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ALGO . . . . . . .  C ADDR   006BH   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CERATEA. . . . . .  C ADDR   0095H   A   
+GET_SQUARE . . . .  C ADDR   0133H   A   
+GET_VALUE. . . . .  C ADDR   0064H   A   
+START. . . . . . .  C ADDR   005EH   A   
+SUB0 . . . . . . .  C ADDR   0087H   A   
+SUB1 . . . . . . .  C ADDR   009FH   A   
+SUB10. . . . . . .  C ADDR   0104H   A   
+SUB11. . . . . . .  C ADDR   0105H   A   
+SUB12. . . . . . .  C ADDR   0106H   A   
+SUB13. . . . . . .  C ADDR   011DH   A   
+SUB2 . . . . . . .  C ADDR   00A6H   A   
+SUB3 . . . . . . .  C ADDR   00A7H   A   
+SUB4 . . . . . . .  C ADDR   00A8H   A   
+SUB5 . . . . . . .  C ADDR   00BFH   A   
+SUB6 . . . . . . .  C ADDR   00D5H   A   
+SUB7 . . . . . . .  C ADDR   00D6H   A   
+SUB8 . . . . . . .  C ADDR   00D7H   A   
+SUB9 . . . . . . .  C ADDR   00EEH   A   
+TABLE. . . . . . .  C ADDR   0050H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

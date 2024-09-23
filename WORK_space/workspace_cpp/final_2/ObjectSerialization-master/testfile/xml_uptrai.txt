@@ -1,0 +1,9 @@
+<serialization>
+    <unique_ptr＜int［］＞ size="5">
+        <unique_ptra_0 val="1"/>
+        <unique_ptra_1 val="4"/>
+        <unique_ptra_2 val="9"/>
+        <unique_ptra_3 val="16"/>
+        <unique_ptra_4 val="25"/>
+    </unique_ptr＜int［］＞>
+</serialization>

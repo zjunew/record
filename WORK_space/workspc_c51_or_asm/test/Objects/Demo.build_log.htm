@@ -1,0 +1,78 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.25.3.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: w dm, zju, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DARMSTM.DLL V1.65.0.0
+Target DLL:      UL2CM3.DLL V1.155.0.0
+Dialog DLL:      TARMSTM.DLL V1.64.0.0
+ 
+<h2>Project:</h2>
+C:\vscode\WORK_space\workspc_c51_or_asm\test\Demo.uvprojx
+Project File Date:  06/12/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.05 update 1 (build 106)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+compiling main.c...
+.\User\Inc\stack.h(15): warning:  #1295-D: Deprecated declaration stack_create - give arg types
+  STACK *stack_create();
+.\User\Inc\stack.h(25): warning:  #1-D: last line of file ends without a newline
+  #endif
+User\Src\main.c(13): warning:  #1295-D: Deprecated declaration calculate - give arg types
+  void calculate();
+User\Src\main.c(176): error:  #29: expected an expression
+  		for(int i=0;i<=stack_flag-1;i++)
+User\Src\main.c(176): error:  #20: identifier "i" is undefined
+  		for(int i=0;i<=stack_flag-1;i++)
+User\Src\main.c(196): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_top(s2,&oop);//将最顶的一个操作符号备�?  					             ^
+User\Src\main.c(199): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_pop(s2,&oop);
+User\Src\main.c(201): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_top(s2,&oop);//将括号内的计算后存入s1中，						
+User\Src\main.c(203): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_pop(s2,&oop); //将反括号去掉�?  					             ^
+User\Src\main.c(217): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  					stack_top(s2,&oop);
+User\Src\main.c(247): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_pop(s2,&oop);
+User\Src\main.c(251): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  						stack_top(s2,&oop);
+User\Src\main.c(273): error:  #167: argument of type "u8 *" is incompatible with parameter of type "const int *"
+  					stack_push(s2,&oop);
+User\Src\main.c(285): error:  #167: argument of type "u8 *" is incompatible with parameter of type "int *"
+  			stack_pop(s2,&oop);
+User\Src\main.c: 3 warnings, 11 errors
+".\Objects\Demo.axf" - 11 Error(s), 3 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

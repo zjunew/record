@@ -1,0 +1,258 @@
+C51 COMPILER V9.59.0.0   SE                                                                05/30/2024 08:43:46 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE SE
+OBJECT MODULE PLACED IN .\Objects\se.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\forth_pro\se.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Li
+                    -stings\se.lst) TABS(2) OBJECT(.\Objects\se.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          //---重定义关键词---//
+   4          #ifndef uchar
+   5          #define uchar unsigned char
+   6          #endif
+   7          
+   8          #ifndef uint 
+   9          #define uint unsigned int
+  10          #endif
+  11          
+  12          
+  13          #define LCD1602_DATAPINS P0
+  14          sbit LCD1602_E=P2^7;
+  15          sbit LCD1602_RW=P2^5;
+  16          sbit LCD1602_RS=P2^6;
+  17          /*在51单片机12MHZ时钟下的延时函数*/
+  18          void Lcd1602_Delay1ms(uint c);   //误差 0us
+  19          /*LCD1602写入8位命令子函数*/
+  20          void LcdWriteCom(uchar com);
+  21          /*LCD1602写入8位数据子函数*/  
+  22          void LcdWriteData(uchar dat)  ;
+  23          /*LCD1602初始化子程序*/   
+  24          void LcdInit(); 
+  25          #define GPIO_KEY P1
+  26          
+  27          unsigned char KeyValue;
+  28          unsigned char KeyState;
+  29          
+  30          unsigned char oper_state;
+  31          unsigned char MY_oper;
+  32          
+  33          sbit key1=P3^0;
+  34          sbit key2=P3^1;
+  35          sbit key3=P3^2;
+  36          sbit key4=P3^3;
+  37          sbit key5=P3^4;
+  38          sbit key6=P3^5;
+  39          sbit key7=P3^6;
+  40          sbit key8=P3^7;
+  41          
+  42          unsigned char dat[]="0123456789ABCDEF+-*/()=!";
+  43          unsigned char nums[20];
+  44          int count = 0;
+  45          void Delay10ms();  
+  46          void KeyDown();   
+  47          void delay(unsigned char i)
+  48          {
+  49   1        while(i--); 
+  50   1      }
+  51          
+  52          void operater_down()
+  53          {
+  54   1        if(key1 == 0)     
+C51 COMPILER V9.59.0.0   SE                                                                05/30/2024 08:43:46 PAGE 2   
+
+  55   1        { 
+  56   2          delay(1000);   
+  57   2          if(key1 == 0) 
+  58   2          {
+  59   3            oper_state = 1;
+  60   3            MY_oper = 16 ;
+  61   3          }
+  62   2          while( !key1 );  
+  63   2        } 
+  64   1        if(key2 == 0)     
+  65   1        { 
+  66   2          delay(1000);
+  67   2          if(key2 == 0) 
+  68   2          {
+  69   3            oper_state = 1;
+  70   3            MY_oper = 17 ;
+  71   3          }
+  72   2          while(!key2);  
+  73   2        } 
+  74   1        if(key3 == 0)     
+  75   1        { 
+  76   2          delay(1000);
+  77   2          if(key3 == 0) 
+  78   2          {
+  79   3            oper_state = 1;
+  80   3            MY_oper = 18 ;
+  81   3          }
+  82   2          while(!key3);  
+  83   2        } 
+  84   1        if(key4 == 0)     
+  85   1        { 
+  86   2          delay(1000);
+  87   2          if(key4 == 0) 
+  88   2          {
+  89   3            oper_state = 1;
+  90   3            MY_oper = 19 ;
+  91   3          }
+  92   2          while(!key4);  
+  93   2        } 
+  94   1        if(key5 == 0)     
+  95   1        { 
+  96   2          delay(1000); 
+  97   2          if(key5 == 0) 
+  98   2          {
+  99   3            oper_state = 1;
+ 100   3            MY_oper = 20 ;
+ 101   3          }
+ 102   2          while(!key5);  
+ 103   2        } 
+ 104   1        // if(key6 == 0)      
+ 105   1        // {  
+ 106   1        //  delay(2000);
+ 107   1        //  if(key6 == 0) 
+ 108   1        //  {
+ 109   1        //    oper_state = 1;
+ 110   1        //    MY_oper = 21 ;
+ 111   1        //  }
+ 112   1        //  while(!key6);  
+ 113   1        // }  
+ 114   1        if(key7 == 0)     
+ 115   1        { 
+ 116   2          delay(1000);
+C51 COMPILER V9.59.0.0   SE                                                                05/30/2024 08:43:46 PAGE 3   
+
+ 117   2          if(key7 == 0) 
+ 118   2          {
+ 119   3            oper_state = 1;
+ 120   3            MY_oper = 21 ;
+ 121   3          }
+ 122   2          while(!key7);  
+ 123   2        } 
+ 124   1        if(key8 == 0)     
+ 125   1        { 
+ 126   2          delay(1000);  
+ 127   2          if(key8 == 0) 
+ 128   2          {
+ 129   3            oper_state = 1;
+ 130   3            MY_oper = 22 ;
+ 131   3          }
+ 132   2          while(!key8);  
+ 133   2        } 
+ 134   1      }
+ 135          
+ 136          void main(void)
+ 137          {
+ 138   1        unsigned char i;
+ 139   1        LcdInit();
+ 140   1      
+ 141   1        oper_state = 0;
+ 142   1        while(1)
+ 143   1        {
+ 144   2              operater_down();
+ 145   2      
+ 146   2          if(oper_state)
+ 147   2          {
+ 148   3                  nums[count] = MY_oper ;
+ 149   3                  LcdWriteCom(0x80);
+ 150   3                  count++;
+ 151   3                  for(i = 0 ; i < count ; i++)
+ 152   3                      LcdWriteData(dat[nums[i]]);
+ 153   3                  oper_state = 0 ;
+ 154   3          }
+ 155   2        }       
+ 156   1      }
+ 157          
+ 158          void Delay10ms(void)   //误差 0us
+ 159          {
+ 160   1          unsigned char a,b,c;
+ 161   1          for(c=1;c>0;c--)
+ 162   1              for(b=38;b>0;b--)
+ 163   1                  for(a=130;a>0;a--);
+ 164   1      }
+ 165          
+ 166          void LcdWriteCom(unsigned char com)   //写入命令
+ 167          {
+ 168   1        LCD1602_E = 0;   //使能清零
+ 169   1        LCD1602_RS = 0;  //选择写入命令
+ 170   1        LCD1602_RW = 0;  //选择写入
+ 171   1      
+ 172   1        LCD1602_DATAPINS = com; //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+ 173   1        Lcd1602_Delay1ms(1);
+ 174   1      
+ 175   1        LCD1602_E = 1;   //写入时序
+ 176   1        Lcd1602_Delay1ms(5);
+ 177   1        LCD1602_E = 0;
+ 178   1      
+C51 COMPILER V9.59.0.0   SE                                                                05/30/2024 08:43:46 PAGE 4   
+
+ 179   1      //  Lcd1602_Delay1ms(1);
+ 180   1        LCD1602_DATAPINS = com << 4; //发送低四位
+ 181   1        Lcd1602_Delay1ms(1);
+ 182   1      
+ 183   1        LCD1602_E = 1;   //写入时序
+ 184   1        Lcd1602_Delay1ms(5);
+ 185   1        LCD1602_E = 0;
+ 186   1      }
+ 187          void Lcd1602_Delay1ms(uint c)   //误差 0us
+ 188          {
+ 189   1          uchar a,b;
+ 190   1        for (; c>0; c--)
+ 191   1        {
+ 192   2           for (b=199;b>0;b--)
+ 193   2           {
+ 194   3              for(a=1;a>0;a--);
+ 195   3           }      
+ 196   2        }
+ 197   1            
+ 198   1      }
+ 199          
+ 200          void LcdWriteData(uchar dat)      //写入数据
+ 201          {
+ 202   1        LCD1602_E = 0;    //使能清零
+ 203   1        LCD1602_RS = 1;   //选择写入数据
+ 204   1        LCD1602_RW = 0;   //选择写入
+ 205   1      
+ 206   1        LCD1602_DATAPINS = dat; //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+ 207   1        Lcd1602_Delay1ms(1);
+ 208   1      
+ 209   1        LCD1602_E = 1;    //写入时序
+ 210   1        Lcd1602_Delay1ms(5);
+ 211   1        LCD1602_E = 0;
+ 212   1      
+ 213   1        LCD1602_DATAPINS = dat << 4; //写入低四位
+ 214   1        Lcd1602_Delay1ms(1);
+ 215   1      
+ 216   1        LCD1602_E = 1;    //写入时序
+ 217   1        Lcd1602_Delay1ms(5);
+ 218   1        LCD1602_E = 0;
+ 219   1      }
+ 220          void LcdInit()              //LCD初始化子程序
+ 221          {
+ 222   1        LcdWriteCom(0x32);   //将8位总线转为4位总线
+ 223   1        LcdWriteCom(0x28);   //在四位线下的初始化
+ 224   1        LcdWriteCom(0x0c);  //开显示不显示光标
+ 225   1        LcdWriteCom(0x06);  //写一个指针加1
+ 226   1        LcdWriteCom(0x01);  //清屏
+ 227   1        LcdWriteCom(0x80);  //设置数据指针起点
+ 228   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    428    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     51       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

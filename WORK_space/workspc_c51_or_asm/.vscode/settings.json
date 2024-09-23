@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "lcd.h": "c",
+        "stdlib.h": "c",
+        "ostream": "cpp",
+        "string.h": "c"
+    }
+}

@@ -1,0 +1,140 @@
+
+音乐
+e.g:
+<audio controls>
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+您的浏览器不支持 audio 元素。
+</audio>
+<audio> 元素允许使用多个 <source> 元素. <source> 元素可以链接不同的音频文件，
+浏览器将使用第一个支持的音频文件.
+
+<p><a href="horse.mp3">点击此处播放</a></p>
+//音乐
+https://m701.music.126.net/20240120105543/f791ccbb08f575bd5dd08f2c19c70b8c/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/17555150948/b802/1de3/6bd2/f9ea15777ae8fd9254cb64373ae0024b.mp3
+
+装入不成功，IE浏览器不支持
+
+
+    <!-- 开始页面 -->
+    <div id="startPage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <h1>Welcome to zju-star!</h1>
+        <p>Click the button below to start the animation.</p>
+        <button onclick="startAnimation()">Start Animation</button>
+    </div>
+
+    
+    <script>
+        function startAnimation() {
+            // 获取开始页面的元素
+            const startPage = document.getElementById("startPage");
+            // 隐藏开始页面
+            startPage.style.display = "none";
+
+            
+        }
+    </script>
+
+不成功，overflow:hidden的作用
+
+单选按钮：
+<body>
+
+<form action="">
+<input type="radio" name="sex" value="male">Male<br>
+<input type="radio" name="sex" value="female">Female
+</form>
+
+<p><b>注意：</b>当用户点击一个单选按钮时，它就会被选中，其他同名的单选按钮就不会被选中。</p>
+
+</body>
+
+javascript,css,html:
+    HTML 定义了网页的内容
+    CSS 描述了网页的布局
+    JavaScript 控制了网页的行为
+for example:
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+        function maxNum()
+        {
+            //获取两个文本框的值
+            var x = document.getElementById("num1").value;
+            var y = document.getElementById("num2").value;
+            //强制转换为数值型
+            x = parseFloat(x);
+            y = parseFloat(y);
+            if(x<y)
+            {
+                alert("最大数是："+y);
+            }
+            else
+            {
+                alert("最大数是："+x);
+            }
+        }
+    </script>
+</head>
+<body>
+    第一个数是：<input type="text" id="num1"/><br/>
+    第二个数是：<input type="text" id="num2"/><br/>
+    <input type="button" onclick="maxNum()" value="计算"/>
+</body>
+
+<script>
+    var str="Hello,world!";
+    document.write("字符串长度"+str);
+</script>
+
+核心：窗口对象
+
+1.windows
+e.g:
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+        var newWindow = window.open("http://www.lvyestudy.com","","width=200,height=200");
+        function closeWindow()
+        {
+            newWindow.close();
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="关闭窗口" onclick="closeWindow()"/>
+</body>
+</html>
+
+
+setTimeout()方法与setInterval()方法的语法很相似，实际上这两者在用法方面区别非常大。
+其中setTimeout()方法内的代码只会执行一次，
+而setInterval()方法内的代码会重复性执行，除非你使用clearInterval()方法来取消执行。
+
+（1）alert()：仅有提示文字，没有返回值;
+（2）confirm()：具有提示文字，返回“布尔值”（true或false）;
+
+2.document:
+DOM就是一个接口，我们可以通过DOM来操作页面中各种元素，例如添加元素、删除元素、替换元素等。
+
+javascript对象：
+e.g:
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <input id="btn" type="button" value="提交" />
+    <script type="text/javascript">
+        var e = document.getElementById("btn");
+        e.onclick = function () {
+            alert("绿叶学习网");
+        }
+    </script>
+</body>
+</html>

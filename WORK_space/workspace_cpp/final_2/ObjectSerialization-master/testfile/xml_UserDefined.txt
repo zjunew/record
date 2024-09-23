@@ -1,0 +1,12 @@
+<serialization>
+    <int val="5"/>
+    <double val="9.5999999999999996"/>
+    <bool val="1"/>
+    <string val="myString"/>
+    <vector size="4">
+        <vector_0 val="1"/>
+        <vector_1 val="3"/>
+        <vector_2 val="5"/>
+        <vector_3 val="7"/>
+    </vector>
+</serialization>

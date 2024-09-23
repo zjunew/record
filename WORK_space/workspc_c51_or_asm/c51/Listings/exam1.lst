@@ -1,0 +1,123 @@
+A51 MACRO ASSEMBLER  EXAM1                                                                05/11/2024 16:49:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\exam1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\exam1.asm SET(SMALL) DEBUG PRINT(.\Listings\exam1.lst) OBJECT(.\Obje
+                      cts\exam1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+0000 02004E            2         LJMP TABLE
+0040                   3         ORG 0040H
+0040                   4     START:
+0040 3F065B4F          5         DB  63, 6, 91, 79, 102 ,109 ,125, 7, 127,111,119,115,64,0
+0044 666D7D07                
+0048 7F6F7773                
+004C 4000                    
+004E                   6     TABLE:
+                       7         
+004E 7877              8             MOV R0 , #0x77
+0050 7964              9             MOV R1 , #100
+0052 7A06             10         MOV R2 , #0x06
+0054 7B5B             11         MOV R3 , #0x5b
+0056 7C3F             12         MOV R4 , #0X3F
+0058 7D3F             13         MOV R5 , #0X3F
+005A 7E3F             14         MOV R6 , #0X3F
+005C 7F3F             15         MOV R7 , #0X3F
+                      16     
+005E                  17     MAIN:
+005E 11CC             18             ACALL DELAY
+0060 C2A2             19             CLR P2.2 
+0062 C2A3             20         CLR P2.3 
+0064 C2A4             21         CLR P2.4 
+0066 8880             22         MOV P0, R0
+0068 11CC             23         ACALL DELAY
+006A 11C3             24         ACALL CLEAR
+                      25             
+006C D2A2             26             SETB P2.2 
+006E C2A3             27         CLR P2.3 
+0070 C2A4             28         CLR P2.4 
+0072 758040           29         MOV P0, #0x40
+0075 11CC             30         ACALL DELAY
+0077 11C3             31         ACALL CLEAR
+                      32             
+0079 C2A2             33         CLR P2.2 
+007B D2A3             34         SETB P2.3 
+007D C2A4             35         CLR P2.4 
+007F 8A80             36         MOV P0, R2
+0081 11CC             37         ACALL DELAY
+0083 11C3             38         ACALL CLEAR
+                      39     
+0085 D2A2             40         SETB P2.2 
+0087 D2A3             41         SETB P2.3 
+0089 C2A4             42         CLR P2.4 
+008B 8B80             43         MOV P0, R3
+008D 11CC             44         ACALL DELAY
+008F 11C3             45         ACALL CLEAR
+                      46     
+0091 C2A2             47         CLR P2.2 
+0093 C2A3             48         CLR P2.3 
+0095 D2A4             49         SETB P2.4 
+0097 8C80             50         MOV P0, R4
+0099 11CC             51         ACALL DELAY
+009B 11C3             52         ACALL CLEAR
+                      53     
+009D D2A2             54         SETB P2.2 
+A51 MACRO ASSEMBLER  EXAM1                                                                05/11/2024 16:49:53 PAGE     2
+
+009F C2A3             55         CLR P2.3 
+00A1 D2A4             56         SETB P2.4 
+00A3 8D80             57         MOV P0, R5
+00A5 11CC             58         ACALL DELAY
+00A7 11C3             59         ACALL CLEAR
+                      60     
+00A9 C2A2             61         CLR P2.2 
+00AB D2A3             62         SETB P2.3 
+00AD D2A4             63         SETB P2.4 
+00AF 8E80             64         MOV P0, R6
+00B1 11CC             65         ACALL DELAY
+00B3 11C3             66         ACALL CLEAR
+                      67             
+00B5 D2A2             68         SETB P2.2 
+00B7 D2A3             69         SETB P2.3 
+00B9 D2A4             70         SETB P2.4 
+00BB 8F80             71         MOV P0, R7
+00BD 11CC             72         ACALL DELAY
+00BF 11C3             73         ACALL CLEAR
+                      74     
+00C1 809B             75         SJMP MAIN
+                      76     
+00C3                  77     CLEAR:
+00C3 C2A2             78         CLR P2.2 
+00C5 C2A3             79         CLR P2.3 
+00C7 C2A4             80         CLR P2.4 
+00C9 758000           81             MOV P0 , #0x00
+                      82     
+00CC 79FF             83     DELAY: MOV R1, #0XFF 
+00CE D9FE             84     D1: DJNZ R1, D1
+00D0 22               85         RET
+                      86     END
+A51 MACRO ASSEMBLER  EXAM1                                                                05/11/2024 16:49:53 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CLEAR. . . . . . .  C ADDR   00C3H   A   
+D1 . . . . . . . .  C ADDR   00CEH   A   
+DELAY. . . . . . .  C ADDR   00CCH   A   
+MAIN . . . . . . .  C ADDR   005EH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0040H   A   
+TABLE. . . . . . .  C ADDR   004EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

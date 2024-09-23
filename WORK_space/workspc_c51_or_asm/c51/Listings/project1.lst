@@ -1,0 +1,103 @@
+A51 MACRO ASSEMBLER  PROJECT1                                                             06/09/2024 16:55:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\project1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\ั้สี\2\project1.asm SET(LARGE) DEBUG PRINT(.\Listings\project1.lst) 
+                      OBJECT(.\Objects\project1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1         ORG 0000H
+0000 020030            2         LJMP START
+0003                   3         ORG 0003H
+0003 020041            4         LJMP IN00
+0013                   5         ORG 0013H
+0013 020053            6         LJMP IN11
+0030                   7         ORG 0030H
+0030                   8     START:
+0030 758000            9             MOV P0 , #00H
+0033 7801             10             MOV R0 , #01H
+0035 D2AF             11         SETB EA
+                      12     
+0037 D2A8             13         SETB EX0
+0039 D2AA             14         SETB EX1
+003B D288             15         SETB IT0
+003D D28A             16         SETB IT1
+003F                  17     MAIN:
+                      18         
+003F 80FE             19         SJMP $
+                      20     
+0041                  21     IN00:
+0041 120071           22             LCALL DELAY
+0044 E8               23         MOV A, R0
+0045 23               24         RL A
+0046 F8               25         MOV R0, A
+0047 8880             26             MOV P0 ,R0
+0049 120071           27             LCALL DELAY
+004C 120071           28             LCALL DELAY
+004F 120071           29             LCALL DELAY
+0052 32               30         RETI
+                      31         
+                      32     
+0053                  33     IN11:
+0053 7908             34         MOV R1, #08H
+0055                  35     LOOP:
+0055 1171             36         ACALL DELAY
+0057 E8               37         MOV A, R0
+0058 23               38         RL A
+0059 F8               39         MOV R0, A 
+005A 8880             40             MOV P0, R0
+005C D9F7             41         DJNZ R1, LOOP
+005E 120071           42             LCALL DELAY
+0061 120071           43             LCALL DELAY
+0064 120071           44             LCALL DELAY
+0067 20B301           45         JB P3.3, TURN_OFF
+006A 32               46         RETI
+                      47     
+006B                  48     TURN_OFF:
+006B 758000           49         MOV P0, #00H
+006E 7801             50             MOV R0, #01H
+0070 32               51         RETI 
+                      52     
+0071                  53     DELAY:
+0071 7AFF             54         MOV R2, #0FFH
+0073                  55     DELAY1:
+0073 7BFF             56         MOV R3, #0FFH
+0075                  57     DELAY2:
+A51 MACRO ASSEMBLER  PROJECT1                                                             06/09/2024 16:55:50 PAGE     2
+
+0075 DBFE             58         DJNZ R3, DELAY2
+0077 DAFA             59         DJNZ R2, DELAY1
+0079 22               60         RET
+                      61     END
+A51 MACRO ASSEMBLER  PROJECT1                                                             06/09/2024 16:55:50 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0071H   A   
+DELAY1 . . . . . .  C ADDR   0073H   A   
+DELAY2 . . . . . .  C ADDR   0075H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+IN00 . . . . . . .  C ADDR   0041H   A   
+IN11 . . . . . . .  C ADDR   0053H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+LOOP . . . . . . .  C ADDR   0055H   A   
+MAIN . . . . . . .  C ADDR   003FH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+START. . . . . . .  C ADDR   0030H   A   
+TURN_OFF . . . . .  C ADDR   006BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
